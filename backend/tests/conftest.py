@@ -30,9 +30,17 @@ def set_sqlite_pragma_test(dbapi_connection, connection_record):
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_engine)
 
 
+from app.database.seed import seed_database
+
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_db():
     Base.metadata.create_all(bind=test_engine)
+    session = TestingSessionLocal()
+    try:
+        seed_database(session)
+    finally:
+        session.close()
     yield
     Base.metadata.drop_all(bind=test_engine)
 
