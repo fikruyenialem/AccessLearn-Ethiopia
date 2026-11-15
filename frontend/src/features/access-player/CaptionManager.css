@@ -1,0 +1,52 @@
+.caption-container {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+}
+
+.caption-text {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  max-width: 100%;
+}
+
+/* Font Size Scales */
+.caption-size-small .caption-text { font-size: 14px; }
+.caption-size-medium .caption-text { font-size: 18px; }
+.caption-size-large .caption-text { font-size: 24px; }
+.caption-size-xlarge .caption-text { font-size: 30px; }
+
+/* Color Themes & Opacities */
+.caption-color-white_on_black .caption-text {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, var(--caption-opacity, 0.75));
+}
+
+.caption-color-yellow_on_black .caption-text {
+  color: #ffff00;
+  background-color: rgba(0, 0, 0, var(--caption-opacity, 0.75));
+}
+
+.caption-color-cyan_on_black .caption-text {
+  color: #00ffff;
+  background-color: rgba(0, 0, 0, var(--caption-opacity, 0.75));
+}
+
+.caption-color-black_on_white .caption-text {
+  color: #000000;
+  background-color: rgba(255, 255, 255, var(--caption-opacity, 0.85));
+  text-shadow: none;
+}

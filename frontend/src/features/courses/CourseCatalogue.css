@@ -1,0 +1,143 @@
+.course-catalogue {
+  margin-top: 24px;
+}
+
+.catalogue-header {
+  margin-bottom: 24px;
+}
+
+.catalogue-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--text-heading);
+}
+
+.catalogue-subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin: 0;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.course-card {
+  background-color: var(--primary-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.course-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #0f172a;
+}
+
+.course-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-source-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.course-source-badge.savanna {
+  background-color: #d97706;
+  color: #ffffff;
+}
+
+.course-source-badge.internal {
+  background-color: #0d9488;
+  color: #ffffff;
+}
+
+.course-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.course-level-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background-color: var(--surface-alt);
+  color: var(--text-muted);
+}
+
+.course-lang-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.course-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--text-heading);
+  line-height: 1.35;
+}
+
+.course-card-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.course-card-footer {
+  margin-top: auto;
+}
+
+.start-course-btn {
+  width: 100%;
+  background-color: var(--accent-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-course-btn:hover {
+  background-color: var(--accent-teal-hover);
+}

@@ -1,0 +1,101 @@
+:root {
+  /* Brand Palette (Restrained Professional EdTech Identity) */
+  --primary-navy: #0f172a;
+  --primary-navy-dark: #020617;
+  --primary-surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-alt: #f1f5f9;
+  
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --text-main: #1e293b;
+  --text-muted: #475569;
+  --text-heading: #0f172a;
+
+  /* Meaningful Interactive & Action Accents */
+  --accent-teal: #0d9488;
+  --accent-teal-hover: #0f766e;
+  --accent-teal-subtle: #ccfbf1;
+  --accent-warm: #d97706;
+  --accent-warm-hover: #b45309;
+
+  /* Feedback Colors */
+  --success-green: #15803d;
+  --success-bg: #dcfce7;
+  --warning-amber: #b45309;
+  --error-red: #b91c1c;
+
+  /* Typography with Ethiopic Unicode Script Support */
+  --font-sans: 'Noto Sans Ethiopic', 'Nyala', 'Abyssinica SIL', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+
+  /* Base Scalable Units (Multiplied by --text-scale in Accessibility Context) */
+  --text-scale-factor: 1;
+  --font-size-base: calc(16px * var(--text-scale-factor));
+  --font-size-sm: calc(14px * var(--text-scale-factor));
+  --font-size-xs: calc(12px * var(--text-scale-factor));
+  --font-size-lg: calc(18px * var(--text-scale-factor));
+  --font-size-xl: calc(22px * var(--text-scale-factor));
+  --font-size-2xl: calc(28px * var(--text-scale-factor));
+
+  /* Focus Indicator Ring */
+  --focus-outline-color: #0d9488;
+  --focus-outline-width: 3px;
+  --focus-outline-offset: 3px;
+}
+
+/* Dark Mode Theme */
+[data-theme='dark'] {
+  --primary-navy: #090d16;
+  --primary-surface: #111827;
+  --surface-muted: #1f2937;
+  --surface-alt: #374151;
+  --border-subtle: #374151;
+  --border-strong: #4b5563;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-heading: #ffffff;
+  --accent-teal: #14b8a6;
+  --accent-teal-hover: #2dd4bf;
+  --accent-teal-subtle: rgba(20, 184, 166, 0.15);
+  --focus-outline-color: #2dd4bf;
+}
+
+/* High Contrast Mode Theme (WCAG 2.2 AAA Target) */
+[data-contrast='high'] {
+  --primary-navy: #000000;
+  --primary-surface: #000000;
+  --surface-muted: #111111;
+  --surface-alt: #222222;
+  --border-subtle: #ffffff;
+  --border-strong: #ffffff;
+  --text-main: #ffffff;
+  --text-muted: #f0f0f0;
+  --text-heading: #ffff00;
+  --accent-teal: #00ffff;
+  --accent-teal-hover: #ffffff;
+  --accent-teal-subtle: #003333;
+  --accent-warm: #ffff00;
+  --focus-outline-color: #ffff00;
+  --focus-outline-width: 4px;
+}
+
+/* Monochrome Mode */
+[data-contrast='monochrome'] {
+  filter: grayscale(100%);
+}
+
+/* Color-Vision Deficiency Accommodations */
+[data-color-vision='protanopia_deuteranopia'] {
+  --accent-teal: #0284c7;
+  --accent-warm: #d97706;
+  --success-green: #0369a1;
+  --error-red: #ea580c;
+}
+
+[data-color-vision='tritanopia'] {
+  --accent-teal: #059669;
+  --accent-warm: #dc2626;
+  --success-green: #059669;
+}

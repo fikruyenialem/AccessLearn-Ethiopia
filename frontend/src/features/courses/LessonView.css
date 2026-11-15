@@ -1,0 +1,222 @@
+.lesson-view-container {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: var(--surface-alt);
+}
+
+.course-progress-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.progress-bar-track {
+  width: 120px;
+  height: 8px;
+  background-color: var(--border-subtle);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--accent-teal);
+  transition: width 0.3s ease;
+}
+
+.lesson-header {
+  margin-bottom: 20px;
+}
+
+.lesson-seq-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lesson-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 6px 0 10px;
+  color: var(--text-heading);
+}
+
+.lesson-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 800px;
+}
+
+.lesson-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid var(--border-subtle);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.lesson-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  margin-bottom: -2px;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.lesson-tab-btn:hover {
+  color: var(--text-heading);
+}
+
+.lesson-tab-btn.active {
+  color: var(--accent-teal);
+  border-bottom-color: var(--accent-teal);
+}
+
+.offline-download-action {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.download-pack-btn {
+  background-color: var(--accent-warm);
+  color: #ffffff;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-pack-btn:hover {
+  background-color: var(--accent-warm-hover);
+}
+
+.download-status-msg {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success-green);
+}
+
+.accessible-document-panel {
+  background-color: var(--primary-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 850px;
+}
+
+.doc-meta-bar {
+  padding: 8px 12px;
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.doc-rendered-html {
+  line-height: 1.8;
+  color: var(--text-main);
+}
+
+.doc-rendered-html h2 {
+  font-size: 22px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.doc-rendered-html h3 {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.doc-rendered-html ul {
+  padding-left: 24px;
+}
+
+.doc-rendered-html li {
+  margin-bottom: 8px;
+}
+
+.lesson-switcher-nav {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.switcher-heading {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--text-heading);
+}
+
+.switcher-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.switcher-btn {
+  text-align: left;
+  background: var(--primary-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.switcher-btn:hover {
+  background-color: var(--surface-alt);
+}
+
+.switcher-btn.active {
+  background-color: var(--accent-teal-subtle);
+  border-color: var(--accent-teal);
+  font-weight: 700;
+  color: var(--accent-teal-hover);
+}

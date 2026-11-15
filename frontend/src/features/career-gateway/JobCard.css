@@ -1,0 +1,139 @@
+.job-card {
+  background-color: var(--primary-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.job-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.job-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.job-org {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 4px 0 0;
+  color: var(--text-heading);
+}
+
+.audio-summary-btn {
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.audio-summary-btn:hover {
+  background-color: var(--surface-alt);
+  border-color: var(--accent-teal);
+}
+
+.audio-summary-btn.active {
+  background-color: var(--accent-warm);
+  color: #ffffff;
+  border-color: var(--accent-warm);
+}
+
+.job-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.job-meta-pill {
+  font-size: 12px;
+  background-color: var(--surface-muted);
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.job-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.job-section {
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-heading);
+}
+
+.section-text {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.accommodations-box {
+  background-color: var(--accent-teal-subtle);
+  border: 1px solid var(--accent-teal);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.accommodations-box .section-label {
+  color: var(--accent-teal-hover);
+}
+
+.accommodations-box .section-text {
+  color: var(--primary-navy);
+  font-weight: 500;
+}
+
+.job-card-footer {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.apply-link {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--primary-navy);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.apply-link:hover {
+  background-color: #1e293b;
+}

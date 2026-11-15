@@ -1,137 +1,157 @@
 import { useState, useEffect } from 'react'
+import { AccessibilityProvider } from './context/AccessibilityContext'
 import SkipLink from './components/common/SkipLink'
+import Header from './components/common/Header'
+import TabNav from './components/common/TabNav'
+import Footer from './components/common/Footer'
+import CourseCatalogue from './features/courses/CourseCatalogue'
+import LessonView from './features/courses/LessonView'
+import CareerGateway from './features/career-gateway/CareerGateway'
+import OfflineLibrary from './features/offline-learning/OfflineLibrary'
+import CertificateVerification from './features/certificates/CertificateVerification'
+import AccessibilityPanel from './components/accessibility/AccessibilityPanel'
+import { fetchHealth, fetchCourses, fetchCourseDetail } from './services/api'
+import { getOfflineLessons } from './features/offline-learning/offlineStorage'
 import './styles/accessibility.css'
 import './App.css'
 
-function App() {
-  const [healthStatus, setHealthStatus] = useState({ loading: true, data: null, error: null })
+function AppContent() {
+  const [activeTab, setActiveTab] = useState('courses')
+  const [backendHealth, setBackendHealth] = useState({ loading: true, data: null, error: null })
+  const [courses, setCourses] = useState([])
+  const [selectedCourse, setSelectedCourse] = useState(null)
+  const [activeLessonId, setActiveLessonId] = useState(null)
+  const [offlineLessonsCount, setOfflineLessonsCount] = useState(0)
 
+  // Register service worker for offline shell support
   useEffect(() => {
-    // Check backend health status at the explicit native endpoint
-    fetch('http://127.0.0.1:8000/api/v1/health')
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json()
-      })
-      .then((data) => setHealthStatus({ loading: false, data, error: null }))
-      .catch((err) => setHealthStatus({ loading: false, data: null, error: err.message }))
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {})
+    }
   }, [])
+
+  // Check health and load initial courses
+  useEffect(() => {
+    fetchHealth()
+      .then((data) => setBackendHealth({ loading: false, data, error: null }))
+      .catch((err) => setBackendHealth({ loading: false, data: null, error: err.message }))
+
+    fetchCourses()
+      .then((data) => setCourses(data))
+      .catch(() => {})
+
+    getOfflineLessons()
+      .then((list) => setOfflineLessonsCount(list.length))
+      .catch(() => {})
+  }, [])
+
+  const handleSelectCourse = async (courseId) => {
+    try {
+      const detailed = await fetchCourseDetail(courseId)
+      setSelectedCourse(detailed)
+      if (detailed.lessons && detailed.lessons.length > 0) {
+        setActiveLessonId(detailed.lessons[0].id)
+      }
+    } catch (err) {
+      console.error('Could not load course details', err)
+    }
+  }
+
+  const handleOpenOfflineLesson = (rawPack) => {
+    // Construct mock course and open in LessonView directly from offline data
+    const mockCourse = {
+      id: rawPack.courseId || rawPack.course_id || 'offline-course',
+      title: rawPack.course_title || 'Offline Saved Lesson',
+      lessons: [
+        {
+          id: rawPack.lessonId || rawPack.lesson_id,
+          title: rawPack.title,
+          description: rawPack.description || '',
+          content_html: rawPack.contentHtml || rawPack.content_html || '',
+          sequence_number: rawPack.sequence_number || 1,
+          estimated_duration: rawPack.estimated_duration_minutes || 10,
+          media_assets: rawPack.media_assets || [],
+        },
+      ],
+    }
+    setSelectedCourse(mockCourse)
+    setActiveLessonId(rawPack.lessonId || rawPack.lesson_id)
+    setActiveTab('courses')
+  }
 
   return (
     <div className="app-container">
-      <SkipLink targetId="main-content" />
+      <SkipLink targetId="main-content" label="ወደ ዋና ይዘት ዝለል / Skip to main content" />
 
-      <header role="banner" className="app-header">
-        <div className="header-inner">
-          <div className="brand">
-            <span className="brand-badge" aria-hidden="true">AL</span>
-            <div>
-              <h1 className="brand-title">AccessLearn Ethiopia</h1>
-              <p className="brand-subtitle">Inclusive Digital Learning Platform</p>
-            </div>
-          </div>
-          <div className="system-pill" aria-label="Backend connection status">
-            <span
-              className={`status-dot ${healthStatus.data?.healthy ? 'healthy' : 'pending'}`}
-              aria-hidden="true"
-            ></span>
-            <span>
-              {healthStatus.loading
-                ? 'Checking backend...'
-                : healthStatus.data?.healthy
-                ? 'Backend Connected'
-                : 'Backend Offline'}
-            </span>
-          </div>
-        </div>
-      </header>
+      <Header
+        backendHealth={backendHealth}
+        onOpenSettings={() => setActiveTab('accessibility')}
+      />
+
+      <TabNav
+        activeTab={activeTab}
+        onSelectTab={(tabId) => {
+          setActiveTab(tabId)
+          if (tabId !== 'courses') {
+            // Keep state intact
+          }
+        }}
+        offlineCount={offlineLessonsCount}
+      />
 
       <main id="main-content" role="main" tabIndex="-1" className="app-main">
-        <section className="hero-section" aria-labelledby="hero-title">
-          <span className="track-badge">Digital Bridge Accessibility Hackathon 2026 — Track 2</span>
-          <h2 id="hero-title" className="hero-title">
-            Accessible Learning Media for Every Learner
-          </h2>
-          <p className="hero-description">
-            AccessLearn Ethiopia is being designed to provide inclusive online learning experiences
-            for Deaf and hard-of-hearing learners, blind and low-vision learners, and learners using
-            low-bandwidth (2G/3G) connections.
-          </p>
-        </section>
+        {activeTab === 'courses' && (
+          <div id="section-courses" role="region" aria-labelledby="tab-courses">
+            {selectedCourse ? (
+              <LessonView
+                course={selectedCourse}
+                activeLessonId={activeLessonId}
+                onSelectLesson={(lessonId) => setActiveLessonId(lessonId)}
+                onBackToCatalogue={() => setSelectedCourse(null)}
+              />
+            ) : (
+              <CourseCatalogue
+                courses={courses}
+                onSelectCourse={handleSelectCourse}
+              />
+            )}
+          </div>
+        )}
 
-        <section className="features-grid" aria-label="Planned Platform Capabilities">
-          <div className="feature-card">
-            <h3 className="feature-title">AccessPlayer Media Engine</h3>
-            <p className="feature-desc">
-              A planned embeddable video player designed for keyboard navigation, screen-reader
-              compatibility, and custom accessible playback controls.
-            </p>
+        {activeTab === 'careers' && (
+          <div id="section-careers" role="region" aria-labelledby="tab-careers">
+            <CareerGateway />
           </div>
-          <div className="feature-card">
-            <h3 className="feature-title">Multi-Language Captions</h3>
-            <p className="feature-desc">
-              Planned closed caption support for English and Amharic (Ethiopic script), with
-              customizable font size, text colors, and background contrast.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3 className="feature-title">Sign Language Overlay</h3>
-            <p className="feature-desc">
-              A planned movable and resizable video window intended to display synchronized sign
-              language demonstration video alongside lecture content.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3 className="feature-title">Synchronized Transcripts</h3>
-            <p className="feature-desc">
-              A planned interactive transcript panel designed to highlight active speech cues as
-              media plays, with support for seeking and text download.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3 className="feature-title">3G Offline Learning Packs</h3>
-            <p className="feature-desc">
-              Planned downloadable ZIP packages tailored for low-bandwidth connections, bundling
-              lightweight HTML lessons, audio summaries, and text transcripts.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3 className="feature-title">Career Gateway & Certificates</h3>
-            <p className="feature-desc">
-              Planned accessible job listings with accommodation tags, audio job overviews, and
-              verifiable course completion certificates.
-            </p>
-          </div>
-        </section>
+        )}
 
-        <section className="status-section" aria-labelledby="status-title">
-          <h3 id="status-title" className="status-heading">Milestone 1 Baseline Status</h3>
-          <div className="status-card">
-            <p><strong>Platform:</strong> AccessLearn Ethiopia</p>
-            <p><strong>Target Standard:</strong> WCAG 2.2 Level AA</p>
-            <p>
-              <strong>Backend Health Endpoint:</strong>{' '}
-              {healthStatus.loading ? (
-                'Connecting to http://127.0.0.1:8000/api/v1/health...'
-              ) : healthStatus.data ? (
-                <span className="text-success">
-                  Connected ({healthStatus.data.app} v{healthStatus.data.version}, Database: {healthStatus.data.database})
-                </span>
-              ) : (
-                <span className="text-muted">
-                  Offline ({healthStatus.error || 'Server not reachable at http://127.0.0.1:8000'})
-                </span>
-              )}
-            </p>
+        {activeTab === 'offline' && (
+          <div id="section-offline" role="region" aria-labelledby="tab-offline">
+            <OfflineLibrary onOpenLesson={handleOpenOfflineLesson} />
           </div>
-        </section>
+        )}
+
+        {activeTab === 'verify' && (
+          <div id="section-verify" role="region" aria-labelledby="tab-verify">
+            <CertificateVerification />
+          </div>
+        )}
+
+        {activeTab === 'accessibility' && (
+          <div id="section-accessibility" role="region" aria-labelledby="tab-accessibility">
+            <AccessibilityPanel />
+          </div>
+        )}
       </main>
 
-      <footer role="contentinfo" className="app-footer">
-        <p>AccessLearn Ethiopia &bull; Digital Bridge Accessibility Hackathon 2026 &bull; Lideta Tech Hub, Addis Ababa</p>
-      </footer>
+      <Footer />
     </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <AccessibilityProvider>
+      <AppContent />
+    </AccessibilityProvider>
+  )
+}

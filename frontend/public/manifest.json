@@ -1,0 +1,16 @@
+{
+  "name": "ACCESSBRIDGE / AccessLearn Ethiopia",
+  "short_name": "AccessLearn",
+  "description": "Inclusive digital learning media platform designed for Deaf, blind, and low-bandwidth learners across Ethiopia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0d9488",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

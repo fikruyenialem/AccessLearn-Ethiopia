@@ -1,0 +1,74 @@
+[
+  {
+    "id": "cue-1",
+    "start": 0.0,
+    "end": 4.0,
+    "speaker": "Instructor",
+    "en": "Welcome to AccessLearn Ethiopia, the inclusive learning media platform.",
+    "am": "እንኳን ወደ አክሰስ ለርን ኢትዮጵያ፣ ሁሉን አቀፍ የዲጂታል ትምህርት መድረክ በደህና መጡ።"
+  },
+  {
+    "id": "cue-2",
+    "start": 4.5,
+    "end": 9.5,
+    "speaker": "Instructor",
+    "en": "Our mission is ensuring that every learner across Ethiopia has equal access to quality education.",
+    "am": "ግባችን በመላው ኢትዮጵያ የሚገኙ ተማሪዎች እኩል ጥራት ያለው ትምህርት እንዲያገኙ ማረጋገጥ ነው።"
+  },
+  {
+    "id": "cue-3",
+    "start": 10.0,
+    "end": 15.5,
+    "speaker": "Instructor",
+    "en": "Whether you are Deaf, hard-of-hearing, blind, low-vision, or using a 2G mobile network, this player is built for you.",
+    "am": "መስማት የተሳናችሁ፣ ማየት የተሳናችሁ፣ ወይም ዝቅተኛ የ2G/3G ኢንተርኔት የምትጠቀሙ፣ ይህ ማጫወቻ ለእናንተ የተዘጋጀ ነው።"
+  },
+  {
+    "id": "cue-4",
+    "start": 16.0,
+    "end": 21.0,
+    "speaker": "Instructor",
+    "en": "Notice the custom accessible controls: you can adjust playback speed from 0.5x to 2x using the keyboard.",
+    "am": "ተደራሽ መቆጣጠሪያዎቹን ይመልከቱ፡ የቪዲዮውን ፍጥነት በቁልፍ ሰሌዳ ከ0.5x እስከ 2x ማስተካከል ይችላሉ።"
+  },
+  {
+    "id": "cue-5",
+    "start": 21.5,
+    "end": 27.0,
+    "speaker": "Instructor",
+    "en": "Closed captions are available in both English and Amharic, with customizable font sizes and high-contrast color palettes.",
+    "am": "የትርጉም ጽሑፎች (Closed Captions) በእንግሊዝኛ እና በአማርኛ ቋንቋዎች ከተስተካካይ የፊደል መጠን ጋር ይገኛሉ።"
+  },
+  {
+    "id": "cue-6",
+    "start": 27.5,
+    "end": 33.0,
+    "speaker": "Instructor",
+    "en": "The Ethiopian Sign Language overlay window can be moved to any corner or resized to fit your visual preferences.",
+    "am": "የኢትዮጵያ ምልክት ቋንቋ (EthSL) መስኮቱን ወደሚፈልጉት ማዕዘን ማንቀሳቀስ እና መጠኑን ማስተካከል ይችላሉ።"
+  },
+  {
+    "id": "cue-7",
+    "start": 33.5,
+    "end": 39.0,
+    "speaker": "Instructor",
+    "en": "Interactive transcripts below the player highlight active speech in real time and allow instant seeking by clicking any sentence.",
+    "am": "በይነተገናኝ ግልባጩ ተናጋሪው የሚናገረውን በቅጽበት ያደምቃል፣ የፈለጉትን ዓረፍተ ነገር በመጫን ወደዚያ መሄድ ይችላሉ።"
+  },
+  {
+    "id": "cue-8",
+    "start": 39.5,
+    "end": 45.0,
+    "speaker": "Instructor",
+    "en": "When preparing for travel or low-connectivity areas, download the complete 3G offline learning pack directly to your device.",
+    "am": "ኢንተርኔት በሌለበት አካባቢ ለመጠቀም፣ የተሟላውን የትምህርት ጥቅል በቀጥታ ወደ ስልክዎ ማውረድ ይችላሉ።"
+  },
+  {
+    "id": "cue-9",
+    "start": 45.5,
+    "end": 52.0,
+    "speaker": "Instructor",
+    "en": "One lesson. Multiple ways to learn. No learner left behind.",
+    "am": "አንድ ትምህርት። በርካታ የመማሪያ መንገዶች። ማንም ተማሪ ወደ ኋላ አይቀርም።"
+  }
+]

@@ -1,0 +1,73 @@
+.app-footer {
+  background-color: var(--primary-surface);
+  border-top: 1px solid var(--border-subtle);
+  padding: 32px 20px;
+  margin-top: auto;
+  font-size: 14px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-left {
+  max-width: 500px;
+}
+
+.footer-title {
+  margin: 0 0 6px;
+  color: var(--text-heading);
+}
+
+.footer-sub {
+  color: var(--text-muted);
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.footer-quote {
+  color: var(--accent-teal);
+  font-size: 13px;
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.links-header {
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 2px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent-teal);
+  text-decoration: underline;
+}
+
+.wcag-badge {
+  display: inline-block;
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-teal-hover);
+  margin-top: 6px;
+}
