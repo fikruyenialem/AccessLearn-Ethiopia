@@ -30,3 +30,7 @@ dist/
 
 # Local development database
 accesslearn.db
+
+# Vercel
+.vercel
+
