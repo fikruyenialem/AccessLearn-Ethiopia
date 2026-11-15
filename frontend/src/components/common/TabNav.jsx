@@ -1,16 +1,19 @@
+import { useAccessibility } from '../../context/AccessibilityContext'
 import './TabNav.css'
 
 export default function TabNav({ activeTab, onSelectTab, offlineCount = 0 }) {
+  const { t } = useAccessibility()
+
   const tabs = [
-    { id: 'courses', label: 'የትምህርት ካታሎግ / Courses' },
-    { id: 'careers', label: 'የሥራ ዕድሎች / Career Gateway' },
+    { id: 'courses', label: t.nav.courses },
+    { id: 'careers', label: t.nav.careers },
     {
       id: 'offline',
-      label: 'ከመስመር ውጭ / Offline Library',
+      label: t.nav.offline,
       count: offlineCount > 0 ? `(${offlineCount})` : null,
     },
-    { id: 'verify', label: 'ማረጋገጫ / Certificates' },
-    { id: 'accessibility', label: 'ተደራሽነት / Accessibility' },
+    { id: 'verify', label: t.nav.verify },
+    { id: 'accessibility', label: t.nav.accessibility },
   ]
 
   return (

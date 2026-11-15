@@ -13,7 +13,7 @@ export default function InteractiveTranscript({
   cues = [],
   onSeek,
 }) {
-  const { preferences } = useAccessibility()
+  const { preferences, t } = useAccessibility()
   const [searchQuery, setSearchQuery] = useState('')
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0)
   const [fontSizeOffset, setFontSizeOffset] = useState(0)
@@ -140,9 +140,9 @@ export default function InteractiveTranscript({
       <div className="transcript-header">
         <div className="transcript-title-group">
           <h3 id="transcript-heading" className="transcript-title">
-            በይነተገናኝ ግልባጭ / Interactive Transcript
+            {t.transcript.title}
           </h3>
-          <span className="transcript-badge">Synchronized</span>
+          <span className="transcript-badge">{t.transcript.synchronizedBadge}</span>
         </div>
 
         <div className="transcript-actions">
@@ -151,10 +151,10 @@ export default function InteractiveTranscript({
             type="button"
             className={`action-btn ${isSpeaking ? 'active' : ''}`}
             onClick={handleReadAloud}
-            aria-label={isSpeaking ? 'Stop reading transcript aloud' : 'Read transcript aloud using text to speech'}
-            title="Read Aloud"
+            aria-label={isSpeaking ? t.transcript.stopSpeech : t.transcript.readAloud}
+            title={t.transcript.readAloud}
           >
-            {isSpeaking ? 'Stop Speech' : 'Read Aloud'}
+            {isSpeaking ? t.transcript.stopSpeech : t.transcript.readAloud}
           </button>
 
           {/* Copy Button */}
@@ -164,7 +164,7 @@ export default function InteractiveTranscript({
             onClick={handleCopy}
             aria-label="Copy entire transcript with timestamps"
           >
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? t.transcript.copied : t.transcript.copy}
           </button>
 
           {/* Download Dropdown */}
@@ -178,10 +178,10 @@ export default function InteractiveTranscript({
             }}
             aria-label="Download transcript in TXT, VTT, or SRT format"
           >
-            <option value="">Export</option>
-            <option value="txt">Download Text (.txt)</option>
-            <option value="vtt">Download WebVTT (.vtt)</option>
-            <option value="srt">Download SubRip (.srt)</option>
+            <option value="">{t.transcript.export}</option>
+            <option value="txt">{t.transcript.downloadTxt}</option>
+            <option value="vtt">{t.transcript.downloadVtt}</option>
+            <option value="srt">{t.transcript.downloadSrt}</option>
           </select>
 
           {/* Font Size Adjusters */}
@@ -214,7 +214,7 @@ export default function InteractiveTranscript({
         <input
           id="transcript-search"
           type="search"
-          placeholder="ፈልግ / Search speech text..."
+          placeholder={t.transcript.searchPlaceholder}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value)
@@ -226,8 +226,8 @@ export default function InteractiveTranscript({
           <div className="search-nav">
             <span className="search-match-count" aria-live="polite">
               {matchingIndices.length > 0
-                ? `${currentMatchIndex + 1} of ${matchingIndices.length}`
-                : 'No matches'}
+                ? `${currentMatchIndex + 1} ${t.transcript.of} ${matchingIndices.length}`
+                : t.transcript.noMatches}
             </span>
             <button
               type="button"
@@ -283,7 +283,7 @@ export default function InteractiveTranscript({
             >
               <div className="line-meta">
                 <span className="timestamp-badge">{formatTimestamp(cue.start)}</span>
-                {isActive && <span className="active-pill" aria-hidden="true">Active</span>}
+                {isActive && <span className="active-pill" aria-hidden="true">{t.transcript.activeLabel}</span>}
               </div>
               <p className="line-text">{text}</p>
             </div>

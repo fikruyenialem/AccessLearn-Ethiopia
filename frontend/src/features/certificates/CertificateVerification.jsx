@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useAccessibility } from '../../context/AccessibilityContext'
 import { verifyCertificate } from '../../services/api'
 import './CertificateVerification.css'
 
 export default function CertificateVerification() {
+  const { t } = useAccessibility()
   const [code, setCode] = useState('AL-2026-ETH-9821')
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
@@ -30,17 +32,17 @@ export default function CertificateVerification() {
     <section className="cert-verification-section" aria-labelledby="cert-heading">
       <div className="cert-header">
         <h2 id="cert-heading" className="cert-title">
-          የምስክር ወረቀት ማረጋገጫ / Verifiable Certificate Registry
+          {t.certificates.title}
         </h2>
         <p className="cert-subtitle">
-          Verify authentic completion credentials issued to learners for accessible media mastery.
+          {t.certificates.subtitle}
         </p>
       </div>
 
       <div className="cert-search-card">
         <form onSubmit={handleVerify} className="cert-form">
           <label htmlFor="cert-code-input" className="cert-input-label">
-            የማረጋገጫ ኮድ / Certificate Verification Code:
+            {t.certificates.inputLabel}
           </label>
           <div className="cert-input-row">
             <input
@@ -48,7 +50,7 @@ export default function CertificateVerification() {
               type="text"
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              placeholder="e.g. AL-2026-ETH-9821"
+              placeholder={t.certificates.inputPlaceholder}
               className="cert-input"
               required
             />
@@ -58,17 +60,20 @@ export default function CertificateVerification() {
               disabled={loading}
               aria-label="Verify Certificate Code"
             >
-              {loading ? 'Checking...' : 'አረጋግጥ / Verify'}
+              {loading ? t.certificates.checkingBtn : t.certificates.verifyBtn}
             </button>
           </div>
-          <span className="cert-hint">Sample demonstration code: <code>AL-2026-ETH-9821</code></span>
+          <span className="cert-hint">
+            {t.certificates.sampleHint.split('AL-2026-ETH-9821')[0]}
+            <code>AL-2026-ETH-9821</code>
+          </span>
         </form>
       </div>
 
       {error && (
         <div className="cert-result-error" role="alert">
           <div>
-            <strong>Notice:</strong> {error}
+            <strong>{t.common.notice}:</strong> {error}
           </div>
         </div>
       )}
@@ -78,34 +83,34 @@ export default function CertificateVerification() {
           <div className="cert-card-inner">
             <div className="cert-card-header">
               <div className="cert-institution-mark">
-                <span className="inst-title">ACCESSLEARN ETHIOPIA</span>
-                <span className="inst-sub">Educational Media Accessibility Credential</span>
+                <span className="inst-title">{t.certificates.instTitle}</span>
+                <span className="inst-sub">{t.certificates.instSub}</span>
               </div>
-              <span className="verified-status">Official Verified Record</span>
+              <span className="verified-status">{t.certificates.verifiedStatus}</span>
             </div>
 
             <div className="cert-body">
-              <p className="cert-preamble">This official record certifies that</p>
+              <p className="cert-preamble">{t.certificates.certPreamble}</p>
               <h3 className="cert-recipient">{result.recipient_name}</h3>
-              <p className="cert-conferral">has demonstrated proficiency and completed all curriculum requirements for</p>
+              <p className="cert-conferral">{t.certificates.certConferral}</p>
               <h4 className="cert-course-name">{result.course_title}</h4>
 
               <div className="cert-metadata-table">
                 <div className="meta-row">
-                  <span className="meta-label">Credential ID</span>
+                  <span className="meta-label">{t.certificates.colCredentialId}</span>
                   <span className="meta-val font-mono">{result.verification_code}</span>
                 </div>
                 <div className="meta-row">
-                  <span className="meta-label">Issuing Authority</span>
+                  <span className="meta-label">{t.certificates.colIssuer}</span>
                   <span className="meta-val">{result.issuer}</span>
                 </div>
                 <div className="meta-row">
-                  <span className="meta-label">Date Issued</span>
+                  <span className="meta-label">{t.certificates.colDateIssued}</span>
                   <span className="meta-val">{new Date(result.issued_at).toLocaleDateString()}</span>
                 </div>
                 <div className="meta-row">
-                  <span className="meta-label">Accessibility Standard</span>
-                  <span className="meta-val">WCAG 2.2 Level AA Validated</span>
+                  <span className="meta-label">{t.certificates.colStandard}</span>
+                  <span className="meta-val">{t.certificates.standardVal}</span>
                 </div>
               </div>
             </div>

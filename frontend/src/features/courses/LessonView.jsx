@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useAccessibility } from '../../context/AccessibilityContext'
 import AccessPlayer from '../access-player/AccessPlayer'
 import { saveOfflineLesson } from '../offline-learning/offlineStorage'
 import { saveLessonProgress } from '../../services/api'
@@ -10,6 +11,7 @@ export default function LessonView({
   onSelectLesson,
   onBackToCatalogue,
 }) {
+  const { t } = useAccessibility()
   const [activeTab, setActiveTab] = useState('player') // 'player' | 'document'
   const [downloadStatus, setDownloadStatus] = useState(null)
   const [progressState, setProgressState] = useState({ percentage: 0, status: 'in_progress' })
@@ -45,7 +47,7 @@ export default function LessonView({
   }
 
   const handleDownloadOffline = async (packageType) => {
-    setDownloadStatus('Downloading...')
+    setDownloadStatus(t.lesson.downloading)
     try {
       await saveOfflineLesson(
         {
@@ -54,10 +56,10 @@ export default function LessonView({
         },
         packageType
       )
-      setDownloadStatus('Saved to Offline Library')
+      setDownloadStatus(t.lesson.savedOffline)
       setTimeout(() => setDownloadStatus(null), 3500)
     } catch (err) {
-      setDownloadStatus(`Error: ${err.message}`)
+      setDownloadStatus(`${t.common.error}: ${err.message}`)
       setTimeout(() => setDownloadStatus(null), 4000)
     }
   }
@@ -70,13 +72,13 @@ export default function LessonView({
           type="button"
           className="back-link-btn"
           onClick={onBackToCatalogue}
-          aria-label="Return to course catalogue"
+          aria-label={t.lesson.backToCurriculum}
         >
-          &larr; Back to Curriculum
+          &larr; {t.lesson.backToCurriculum}
         </button>
 
-        <div className="progress-indicator" aria-label={`Lesson progress: ${progressState.percentage}%`}>
-          <span className="progress-text">Lesson Progress: {progressState.percentage}%</span>
+        <div className="progress-indicator" aria-label={`${t.lesson.lessonProgress}: ${progressState.percentage}%`}>
+          <span className="progress-text">{t.lesson.lessonProgress}: {progressState.percentage}%</span>
           <div className="progress-track" aria-hidden="true">
             <div className="progress-fill" style={{ width: `${progressState.percentage}%` }} />
           </div>
@@ -84,7 +86,7 @@ export default function LessonView({
       </div>
 
       <header className="lesson-header">
-        <span className="lesson-step">Unit {currentLesson.sequence_number}</span>
+        <span className="lesson-step">{t.lesson.unitPrefix} {currentLesson.sequence_number}</span>
         <h2 className="lesson-title">{currentLesson.title}</h2>
         <p className="lesson-intro">{currentLesson.description}</p>
       </header>
@@ -101,7 +103,7 @@ export default function LessonView({
             className={`mode-tab-btn ${activeTab === 'player' ? 'active' : ''}`}
             onClick={() => setActiveTab('player')}
           >
-            Media Player &amp; Sign Language
+            {t.lesson.mediaPlayerTab}
           </button>
 
           <button
@@ -113,7 +115,7 @@ export default function LessonView({
             className={`mode-tab-btn ${activeTab === 'document' ? 'active' : ''}`}
             onClick={() => setActiveTab('document')}
           >
-            Accessible Reading Document
+            {t.lesson.readingDocTab}
           </button>
         </div>
 
@@ -122,9 +124,9 @@ export default function LessonView({
             type="button"
             className="offline-pack-btn"
             onClick={() => handleDownloadOffline('full')}
-            aria-label="Download 3G offline lesson package containing text, captions, and audio"
+            aria-label={t.lesson.saveOfflineBtn}
           >
-            Save 3G Offline Pack
+            {t.lesson.saveOfflineBtn}
           </button>
           {downloadStatus && (
             <span className="download-feedback" aria-live="polite">
@@ -155,8 +157,8 @@ export default function LessonView({
             className="reading-document-view"
           >
             <div className="document-masthead">
-              <span className="document-badge">Tagged Accessible HTML Document</span>
-              <span className="document-meta">Optimized for Screen Readers &bull; Zoom 200% Certified</span>
+              <span className="document-badge">{t.lesson.docBadge}</span>
+              <span className="document-meta">{t.lesson.docMeta}</span>
             </div>
             <div
               className="document-body"
@@ -169,7 +171,7 @@ export default function LessonView({
       {/* Multi-lesson Switcher */}
       {course.lessons.length > 1 && (
         <nav className="course-sequence-nav" aria-label="Curriculum Unit Sequence">
-          <h3 className="sequence-heading">Course Units</h3>
+          <h3 className="sequence-heading">{t.lesson.courseUnits}</h3>
           <div className="sequence-list">
             {course.lessons.map((l) => (
               <button
@@ -181,7 +183,7 @@ export default function LessonView({
               >
                 <span className="seq-num">{l.sequence_number}</span>
                 <span className="seq-title">{l.title}</span>
-                <span className="seq-duration">{l.estimated_duration} min</span>
+                <span className="seq-duration">{l.estimated_duration} {t.lesson.minutesShort}</span>
               </button>
             ))}
           </div>

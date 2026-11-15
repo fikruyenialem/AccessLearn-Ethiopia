@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { AccessibilityProvider } from './context/AccessibilityContext'
+import { useAccessibility, AccessibilityProvider } from './context/AccessibilityContext'
 import SkipLink from './components/common/SkipLink'
 import Header from './components/common/Header'
 import TabNav from './components/common/TabNav'
@@ -16,6 +16,7 @@ import './styles/accessibility.css'
 import './App.css'
 
 function AppContent() {
+  const { t } = useAccessibility()
   const [activeTab, setActiveTab] = useState('courses')
   const [backendHealth, setBackendHealth] = useState({ loading: true, data: null, error: null })
   const [courses, setCourses] = useState([])
@@ -81,7 +82,7 @@ function AppContent() {
 
   return (
     <div className="app-container">
-      <SkipLink targetId="main-content" label="ወደ ዋና ይዘት ዝለል / Skip to main content" />
+      <SkipLink targetId="main-content" label={t.common.skipToMain} />
 
       <Header
         backendHealth={backendHealth}

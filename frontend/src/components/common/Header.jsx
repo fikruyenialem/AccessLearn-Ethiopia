@@ -2,33 +2,36 @@ import { useAccessibility } from '../../context/AccessibilityContext'
 import './Header.css'
 
 export default function Header({ backendHealth, onOpenSettings }) {
-  const { preferences, updatePreference } = useAccessibility()
+  const { preferences, updatePreference, t } = useAccessibility()
 
   return (
     <header role="banner" className="app-header">
       <div className="header-inner">
         <div className="brand-group">
           <div className="brand-text">
-            <span className="brand-badge-label">Ethiopian Digital Learning Media</span>
+            <span className="brand-badge-label">
+              {preferences.language === 'am' ? 'የኢትዮጵያ ዲጂታል ትምህርት መድረክ' : 'Ethiopian Digital Learning Media'}
+            </span>
             <h1 className="brand-heading">
               <span className="brand-primary">ACCESSBRIDGE</span>
               <span className="brand-separator"> / </span>
               <span className="brand-secondary">AccessLearn Ethiopia</span>
             </h1>
             <p className="brand-tagline">
-              One lesson. Multiple ways to learn. No learner left behind.
+              {t.footer.colophonMotto.replace(/[“”]/g, '')}
             </p>
           </div>
         </div>
 
         <div className="header-actions">
-          {/* Subtle Language Toggle */}
+          {/* Language Switcher */}
           <div className="lang-toggle-group" role="group" aria-label="Interface Language Selection">
             <button
               type="button"
               className={`lang-btn ${preferences.language === 'en' ? 'active' : ''}`}
               onClick={() => updatePreference('language', 'en')}
               aria-pressed={preferences.language === 'en'}
+              title="Switch to English"
             >
               English
             </button>
@@ -38,19 +41,20 @@ export default function Header({ backendHealth, onOpenSettings }) {
               className={`lang-btn ${preferences.language === 'am' ? 'active' : ''}`}
               onClick={() => updatePreference('language', 'am')}
               aria-pressed={preferences.language === 'am'}
+              title="ወደ አማርኛ ቀይር"
             >
               አማርኛ
             </button>
           </div>
 
-          {/* Quiet Accessibility Options Button */}
+          {/* Accessibility Options Button */}
           <button
             type="button"
             className="settings-action-btn"
             onClick={onOpenSettings}
-            aria-label="Open accessibility preferences dialog"
+            aria-label="Open accessibility preferences"
           >
-            Accessibility / ተደራሽነት
+            {t.nav.accessibility}
           </button>
 
           {/* Understated Backend Health Status */}
@@ -64,10 +68,10 @@ export default function Header({ backendHealth, onOpenSettings }) {
             />
             <span className="status-label">
               {backendHealth.loading
-                ? 'Connecting'
+                ? t.common.backendConnecting
                 : backendHealth.data?.healthy
-                ? 'Backend Active'
-                : 'Offline'}
+                ? (preferences.language === 'am' ? 'መስመር ላይ' : 'Backend Active')
+                : t.common.backendOffline}
             </span>
           </div>
         </div>

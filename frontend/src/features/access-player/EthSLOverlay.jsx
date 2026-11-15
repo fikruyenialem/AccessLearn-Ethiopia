@@ -8,7 +8,7 @@ export default function EthSLOverlay({
   currentTime,
   onClose,
 }) {
-  const { preferences, updatePreference } = useAccessibility()
+  const { preferences, updatePreference, t } = useAccessibility()
   const ethVideoRef = useRef(null)
 
   // Keep EthSL video playback synchronized with main player
@@ -41,12 +41,12 @@ export default function EthSLOverlay({
   return (
     <aside
       className={`ethsl-window pos-${preferences.ethSLPosition} size-${preferences.ethSLSize}`}
-      aria-label="Ethiopian Sign Language Interpreter Overlay"
+      aria-label={t.ethsl.ariaTitle}
       role="region"
     >
       <div className="ethsl-header">
         <span className="ethsl-badge">EthSL</span>
-        <span className="ethsl-title">ምልክት ቋንቋ &bull; Sign Language</span>
+        <span className="ethsl-title">{t.ethsl.title}</span>
         <div className="ethsl-controls">
           <button
             type="button"
@@ -55,7 +55,7 @@ export default function EthSLOverlay({
             title={`Move position (Currently ${preferences.ethSLPosition})`}
             aria-label={`Reposition sign language window, currently at ${preferences.ethSLPosition}`}
           >
-            Pos
+            {t.ethsl.posBtn}
           </button>
           <button
             type="button"
@@ -64,14 +64,14 @@ export default function EthSLOverlay({
             title={`Toggle size (Currently ${preferences.ethSLSize})`}
             aria-label={`Toggle size between normal and large, currently ${preferences.ethSLSize}`}
           >
-            Size
+            {t.ethsl.sizeBtn}
           </button>
           <button
             type="button"
             className="ethsl-btn ethsl-btn-close"
             onClick={onClose}
-            title="Close Sign Language window"
-            aria-label="Close Ethiopian Sign Language interpreter window"
+            title={t.ethsl.closeBtn}
+            aria-label={t.ethsl.closeBtn}
           >
             &times;
           </button>

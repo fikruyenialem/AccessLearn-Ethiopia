@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useAccessibility } from '../../context/AccessibilityContext'
 import './JobCard.css'
 
 export default function JobCard({ job }) {
+  const { t } = useAccessibility()
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
 
   const handlePlayAudio = () => {
@@ -42,7 +44,7 @@ export default function JobCard({ job }) {
           aria-label={isPlayingAudio ? `Stop audio summary for ${job.title}` : `Listen to audio overview for ${job.title}`}
           title="Audio Summary"
         >
-          {isPlayingAudio ? 'Stop Overview' : 'Audio Overview'}
+          {isPlayingAudio ? t.careers.stopOverview : t.careers.audioOverview}
         </button>
       </div>
 
@@ -55,14 +57,14 @@ export default function JobCard({ job }) {
 
       {job.requirements && (
         <div className="job-section">
-          <strong className="section-label">መመዘኛዎች / Requirements:</strong>
+          <strong className="section-label">{t.careers.requirements}</strong>
           <p className="section-text">{job.requirements}</p>
         </div>
       )}
 
       {job.accommodations && (
         <div className="job-section accommodations-box">
-          <strong className="section-label">የተደራሽነት ድጋፎች / Accommodations & Assistive Support:</strong>
+          <strong className="section-label">{t.careers.accommodations}</strong>
           <p className="section-text">{job.accommodations}</p>
         </div>
       )}
@@ -75,7 +77,7 @@ export default function JobCard({ job }) {
           className="apply-link"
           aria-label={`Apply for ${job.title} at ${job.organization} (opens in new tab)`}
         >
-          ማመልከቻ አስገባ / Apply for Position &rarr;
+          {t.careers.applyBtn} &rarr;
         </a>
       </div>
     </article>

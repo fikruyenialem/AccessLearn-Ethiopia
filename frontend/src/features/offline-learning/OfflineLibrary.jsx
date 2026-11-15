@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useAccessibility } from '../../context/AccessibilityContext'
 import { getOfflineLessons, deleteOfflineLesson } from './offlineStorage'
 import './OfflineLibrary.css'
 
@@ -11,6 +12,7 @@ function formatBytes(bytes) {
 }
 
 export default function OfflineLibrary({ onOpenLesson }) {
+  const { t } = useAccessibility()
   const [offlineLessons, setOfflineLessons] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -35,7 +37,7 @@ export default function OfflineLibrary({ onOpenLesson }) {
 
   const handleDelete = async (lessonId, e) => {
     e.stopPropagation()
-    if (confirm('Remove this downloaded lesson from your offline storage?')) {
+    if (confirm(t.offline.confirmDelete)) {
       await deleteOfflineLesson(lessonId)
       loadLessons()
     }
@@ -48,29 +50,26 @@ export default function OfflineLibrary({ onOpenLesson }) {
       <div className="offline-header">
         <div>
           <h2 id="offline-lib-title" className="offline-title">
-            ከመስመር ውጭ ቤተ-መጽሐፍት / 3G Offline Library
+            {t.offline.title}
           </h2>
           <p className="offline-subtitle">
-            Downloaded lessons stored directly inside your browser storage (IndexedDB). Usable anywhere without active internet.
+            {t.offline.subtitle}
           </p>
         </div>
 
         <div className="storage-summary-card">
-          <span className="storage-label">Local Storage In Use:</span>
+          <span className="storage-label">{t.offline.storageInUse}</span>
           <span className="storage-value">{formatBytes(totalStorage)}</span>
-          <span className="storage-count">({offlineLessons.length} lessons stored)</span>
+          <span className="storage-count">({offlineLessons.length} {t.offline.lessonsStored})</span>
         </div>
       </div>
 
       {loading ? (
-        <p>Loading offline storage...</p>
+        <p>{t.common.loading}</p>
       ) : offlineLessons.length === 0 ? (
         <div className="offline-empty-state">
-          <h3>ምንም የወረዱ ትምህርቶች የሉም / No Offline Lessons Stored</h3>
-          <p>
-            When viewing any course lesson, click <strong>"3G Offline Pack"</strong> to save lessons,
-            accessible HTML documents, and audio transcripts directly for offline study.
-          </p>
+          <h3>{t.offline.emptyTitle}</h3>
+          <p>{t.offline.emptyText}</p>
         </div>
       ) : (
         <div className="offline-grid" role="list">
@@ -82,7 +81,7 @@ export default function OfflineLibrary({ onOpenLesson }) {
               aria-labelledby={`offline-title-${item.lessonId}`}
             >
               <div className="offline-card-top">
-                <span className="offline-tag">Local Copy Ready</span>
+                <span className="offline-tag">{t.offline.tagReady}</span>
                 <span className="offline-size">{formatBytes(item.fileSizeBytes)}</span>
               </div>
 
@@ -102,18 +101,18 @@ export default function OfflineLibrary({ onOpenLesson }) {
                   type="button"
                   className="open-offline-btn"
                   onClick={() => onOpenLesson(item.rawPack)}
-                  aria-label={`Open downloaded lesson: ${item.title}`}
+                  aria-label={`${t.offline.openBtn}: ${item.title}`}
                 >
-                  ተማር / Open Lesson &rarr;
+                  {t.offline.openBtn} &rarr;
                 </button>
                 <button
                   type="button"
                   className="delete-offline-btn"
                   onClick={(e) => handleDelete(item.lessonId, e)}
                   aria-label={`Delete ${item.title} from offline storage`}
-                  title="Remove from device storage"
+                  title={t.offline.removeBtn}
                 >
-                  Remove
+                  {t.offline.removeBtn}
                 </button>
               </div>
             </article>

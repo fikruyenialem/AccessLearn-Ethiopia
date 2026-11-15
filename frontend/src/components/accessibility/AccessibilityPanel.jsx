@@ -2,17 +2,17 @@ import { useAccessibility } from '../../context/AccessibilityContext'
 import './AccessibilityPanel.css'
 
 export default function AccessibilityPanel() {
-  const { preferences, updatePreference, resetPreferences } = useAccessibility()
+  const { preferences, updatePreference, resetPreferences, t } = useAccessibility()
 
   return (
     <section className="access-panel-section" aria-labelledby="settings-heading">
       <div className="panel-header">
         <div>
           <h2 id="settings-heading" className="panel-title">
-            የተደራሽነት ምርጫዎች / Personalized Accessibility Settings
+            {t.settings.title}
           </h2>
           <p className="panel-subtitle">
-            Customize visual, auditory, cognitive, and motor preferences. Settings persist across sessions.
+            {t.settings.subtitle}
           </p>
         </div>
 
@@ -22,18 +22,18 @@ export default function AccessibilityPanel() {
           onClick={resetPreferences}
           aria-label="Reset all accessibility preferences to defaults"
         >
-          ወደ ነባሪ መልስ / Reset to Defaults
+          {t.settings.resetBtn}
         </button>
       </div>
 
       <div className="settings-grid">
         {/* Section 1: Vision & Contrast */}
         <fieldset className="settings-group">
-          <legend className="group-legend">የማየት ተደራሽነት / Vision & Contrast</legend>
+          <legend className="group-legend">{t.settings.visionLegend}</legend>
 
           <div className="setting-item">
             <label htmlFor="pref-text-scale" className="setting-label">
-              የፊደል መጠን / Text Scale ({Math.round(preferences.textScale * 100)}%):
+              {t.settings.textScaleLabel} ({Math.round(preferences.textScale * 100)}%):
             </label>
             <div className="scale-buttons-row">
               {[1.0, 1.15, 1.3, 1.5].map((scale) => (
@@ -52,7 +52,7 @@ export default function AccessibilityPanel() {
 
           <div className="setting-item">
             <label htmlFor="pref-contrast" className="setting-label">
-              የቀለም ንፅፅር / Contrast Mode:
+              {t.settings.contrastLabel}:
             </label>
             <select
               id="pref-contrast"
@@ -60,15 +60,15 @@ export default function AccessibilityPanel() {
               onChange={(e) => updatePreference('contrast', e.target.value)}
               className="pref-select"
             >
-              <option value="normal">መደበኛ / Default Contrast</option>
-              <option value="high">ከፍተኛ ንፅፅር / High Contrast (WCAG AAA)</option>
-              <option value="monochrome">ሞኖክሮም / Monochrome</option>
+              <option value="normal">{t.settings.contrastNormal}</option>
+              <option value="high">{t.settings.contrastHigh}</option>
+              <option value="monochrome">{t.settings.contrastMonochrome}</option>
             </select>
           </div>
 
           <div className="setting-item">
             <label htmlFor="pref-theme" className="setting-label">
-              ገጽታ / Display Theme:
+              {t.settings.themeLabel}:
             </label>
             <select
               id="pref-theme"
@@ -76,14 +76,14 @@ export default function AccessibilityPanel() {
               onChange={(e) => updatePreference('theme', e.target.value)}
               className="pref-select"
             >
-              <option value="light">ደማቅ / Light Mode</option>
-              <option value="dark">ጨለማ / Dark Mode</option>
+              <option value="light">{t.settings.themeLight}</option>
+              <option value="dark">{t.settings.themeDark}</option>
             </select>
           </div>
 
           <div className="setting-item">
             <label htmlFor="pref-color-vision" className="setting-label">
-              የቀለም እይታ እርዳታ / Color-Vision Accommodations:
+              {t.settings.colorVisionLabel}:
             </label>
             <select
               id="pref-color-vision"
@@ -91,16 +91,16 @@ export default function AccessibilityPanel() {
               onChange={(e) => updatePreference('colorVision', e.target.value)}
               className="pref-select"
             >
-              <option value="none">መደበኛ / Standard Color Palette</option>
-              <option value="protanopia_deuteranopia">ቀይ-አረንጓዴ / Protanopia & Deuteranopia Palette</option>
-              <option value="tritanopia">ሰማያዊ-ቢጫ / Tritanopia Palette</option>
+              <option value="none">{t.settings.colorVisionNone}</option>
+              <option value="protanopia_deuteranopia">{t.settings.colorVisionProtanopia}</option>
+              <option value="tritanopia">{t.settings.colorVisionTritanopia}</option>
             </select>
           </div>
         </fieldset>
 
         {/* Section 2: Captions & Hearing */}
         <fieldset className="settings-group">
-          <legend className="group-legend">የመስማት ተደራሽነት / Captions & EthSL</legend>
+          <legend className="group-legend">{t.settings.hearingLegend}</legend>
 
           <div className="setting-item checkbox-item">
             <input
@@ -111,13 +111,13 @@ export default function AccessibilityPanel() {
               className="pref-checkbox"
             />
             <label htmlFor="pref-captions" className="checkbox-label">
-              የትርጉም ጽሑፍ ሁልጊዜ ይብራ / Enable Closed Captions by Default
+              {t.settings.enableCaptionsLabel}
             </label>
           </div>
 
           <div className="setting-item">
             <label htmlFor="pref-caption-lang" className="setting-label">
-              የትርጉም ቋንቋ / Preferred Caption Language:
+              {t.settings.captionLangLabel}:
             </label>
             <select
               id="pref-caption-lang"
@@ -132,7 +132,7 @@ export default function AccessibilityPanel() {
 
           <div className="setting-item">
             <label htmlFor="pref-caption-size" className="setting-label">
-              የትርጉም ጽሑፍ መጠን / Caption Font Size:
+              {t.settings.captionSizeLabel}:
             </label>
             <select
               id="pref-caption-size"
@@ -140,16 +140,16 @@ export default function AccessibilityPanel() {
               onChange={(e) => updatePreference('captionSize', e.target.value)}
               className="pref-select"
             >
-              <option value="small">አነስተኛ / Small (14px)</option>
-              <option value="medium">መካከለኛ / Medium (18px)</option>
-              <option value="large">ትልቅ / Large (24px)</option>
-              <option value="xlarge">በጣም ትልቅ / Extra Large (30px)</option>
+              <option value="small">{t.settings.sizeSmall}</option>
+              <option value="medium">{t.settings.sizeMedium}</option>
+              <option value="large">{t.settings.sizeLarge}</option>
+              <option value="xlarge">{t.settings.sizeXLarge}</option>
             </select>
           </div>
 
           <div className="setting-item">
             <label htmlFor="pref-caption-color" className="setting-label">
-              የትርጉም ጽሑፍ ቀለም / Caption Contrast Palette:
+              {t.settings.captionColorLabel}:
             </label>
             <select
               id="pref-caption-color"
@@ -157,10 +157,10 @@ export default function AccessibilityPanel() {
               onChange={(e) => updatePreference('captionColor', e.target.value)}
               className="pref-select"
             >
-              <option value="white_on_black">ነጭ በጥቁር / White on Black</option>
-              <option value="yellow_on_black">ቢጫ በጥቁር / Yellow on Black</option>
-              <option value="cyan_on_black">ሲያን በጥቁር / Cyan on Black</option>
-              <option value="black_on_white">ጥቁር በነጭ / Black on White</option>
+              <option value="white_on_black">{t.settings.colorWhiteOnBlack}</option>
+              <option value="yellow_on_black">{t.settings.colorYellowOnBlack}</option>
+              <option value="cyan_on_black">{t.settings.colorCyanOnBlack}</option>
+              <option value="black_on_white">{t.settings.colorBlackOnWhite}</option>
             </select>
           </div>
 
@@ -173,14 +173,14 @@ export default function AccessibilityPanel() {
               className="pref-checkbox"
             />
             <label htmlFor="pref-ethsl" className="checkbox-label">
-              የምልክት ቋንቋ መስኮት ይብራ / Show Ethiopian Sign Language Overlay by Default
+              {t.settings.enableEthslLabel}
             </label>
           </div>
         </fieldset>
 
         {/* Section 3: Audio Descriptions & Motor Controls */}
         <fieldset className="settings-group">
-          <legend className="group-legend">የድምፅ እና የቁልፍ ሰሌዳ / Audio & Navigation</legend>
+          <legend className="group-legend">{t.settings.audioLegend}</legend>
 
           <div className="setting-item checkbox-item">
             <input
@@ -191,20 +191,20 @@ export default function AccessibilityPanel() {
               className="pref-checkbox"
             />
             <label htmlFor="pref-ad" className="checkbox-label">
-              የማየት ማብራሪያ ድምፅ / Enable Audio Description Tracks
+              {t.settings.enableAdLabel}
             </label>
           </div>
 
           <div className="setting-item shortcuts-guide">
-            <strong className="setting-label">የቁልፍ ሰሌዳ መቆጣጠሪያዎች / Keyboard Navigation:</strong>
+            <strong className="setting-label">{t.settings.keyboardShortcutsLabel}</strong>
             <ul className="shortcuts-list">
-              <li><kbd>Tab</kbd> / <kbd>Shift + Tab</kbd> Move focus sequentially</li>
-              <li><kbd>Space</kbd> or <kbd>K</kbd> Play / Pause video</li>
-              <li><kbd>J</kbd> / <kbd>L</kbd> Seek -10s / +10s</li>
-              <li><kbd>C</kbd> Toggle closed captions</li>
-              <li><kbd>S</kbd> Toggle sign language overlay</li>
-              <li><kbd>D</kbd> Toggle audio descriptions</li>
-              <li><kbd>M</kbd> Mute / Unmute</li>
+              <li><kbd>Tab</kbd> / <kbd>Shift + Tab</kbd> {t.settings.tabShortcut}</li>
+              <li><kbd>Space</kbd> / <kbd>K</kbd> {t.settings.spaceShortcut}</li>
+              <li><kbd>J</kbd> / <kbd>L</kbd> {t.settings.seekShortcut}</li>
+              <li><kbd>C</kbd> {t.settings.cShortcut}</li>
+              <li><kbd>S</kbd> {t.settings.sShortcut}</li>
+              <li><kbd>D</kbd> {t.settings.dShortcut}</li>
+              <li><kbd>M</kbd> {t.settings.mShortcut}</li>
             </ul>
           </div>
         </fieldset>

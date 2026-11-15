@@ -14,7 +14,7 @@ export default function AccessPlayer({
   title = 'Accessible Learning Lecture',
   onProgressUpdate,
 }) {
-  const { preferences, updatePreference } = useAccessibility()
+  const { preferences, updatePreference, t } = useAccessibility()
 
   const playerContainerRef = useRef(null)
   const videoRef = useRef(null)
@@ -238,7 +238,7 @@ export default function AccessPlayer({
         {/* Media Loading Error Message */}
         {hasError && (
           <div className="player-error-overlay" role="alert">
-            <p><strong>Media notice:</strong> The selected remote video stream could not be loaded. Transcripts and offline packages remain fully accessible below.</p>
+            <p><strong>{t.common.notice}:</strong> {t.player.mediaError}</p>
           </div>
         )}
 
@@ -280,14 +280,14 @@ export default function AccessPlayer({
 
       {/* Keyboard Shortcuts Documentation Helper for Screen Readers & Learners */}
       <div className="keyboard-shortcuts-bar" aria-label="Keyboard Shortcuts">
-        <span className="shortcut-label">Shortcuts:</span>
-        <span className="shortcut-item"><kbd>Space</kbd> Play/Pause</span>
-        <span className="shortcut-item"><kbd>J</kbd>/<kbd>L</kbd> ±10s Seek</span>
-        <span className="shortcut-item"><kbd>C</kbd> Captions</span>
-        <span className="shortcut-item"><kbd>S</kbd> Sign Language</span>
-        <span className="shortcut-item"><kbd>D</kbd> Audio Description</span>
-        <span className="shortcut-item"><kbd>M</kbd> Mute</span>
-        <span className="shortcut-item"><kbd>F</kbd> Fullscreen</span>
+        <span className="shortcut-label">{t.player.shortcutsLabel}</span>
+        <span className="shortcut-item"><kbd>Space</kbd> {t.player.shortcutPlay.replace(/^Space\s*/, '')}</span>
+        <span className="shortcut-item"><kbd>J</kbd>/<kbd>L</kbd> ±10s</span>
+        <span className="shortcut-item"><kbd>C</kbd> {t.player.captions}</span>
+        <span className="shortcut-item"><kbd>S</kbd> {t.player.signLanguage}</span>
+        <span className="shortcut-item"><kbd>D</kbd> {t.player.audioDescription}</span>
+        <span className="shortcut-item"><kbd>M</kbd> {t.player.mute}</span>
+        <span className="shortcut-item"><kbd>F</kbd> {t.player.fullscreen}</span>
       </div>
 
       {/* Interactive Transcript Panel */}

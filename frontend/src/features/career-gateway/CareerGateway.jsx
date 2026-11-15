@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useAccessibility } from '../../context/AccessibilityContext'
 import { fetchJobs } from '../../services/api'
 import JobCard from './JobCard'
 import './CareerGateway.css'
 
 export default function CareerGateway() {
+  const { t } = useAccessibility()
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [filterType, setFilterType] = useState('all')
@@ -27,10 +29,10 @@ export default function CareerGateway() {
       <div className="career-header">
         <div>
           <h2 id="career-heading" className="career-title">
-            የሥራ ዕድሎች መድረክ / Accessible Career Gateway
+            {t.careers.title}
           </h2>
           <p className="career-subtitle">
-            Verified technology and inclusive educational employment opportunities with explicit accessibility accommodations.
+            {t.careers.subtitle}
           </p>
         </div>
 
@@ -43,18 +45,18 @@ export default function CareerGateway() {
             onChange={(e) => setFilterType(e.target.value)}
             className="filter-select"
           >
-            <option value="all">ሁሉም የሥራ ዓይነቶች / All Types</option>
-            <option value="full-time">Full-time</option>
-            <option value="contract">Contract</option>
-            <option value="remote">Remote / Hybrid</option>
+            <option value="all">{t.careers.filterAll}</option>
+            <option value="full-time">{t.careers.filterFullTime}</option>
+            <option value="contract">{t.careers.filterContract}</option>
+            <option value="remote">{t.careers.filterRemote}</option>
           </select>
         </div>
       </div>
 
       {loading ? (
-        <p>Loading career opportunities...</p>
+        <p>{t.careers.loadingJobs}</p>
       ) : filteredJobs.length === 0 ? (
-        <p>No listings match the selected filter.</p>
+        <p>{t.careers.noListings}</p>
       ) : (
         <div className="jobs-list" role="list">
           {filteredJobs.map((job) => (

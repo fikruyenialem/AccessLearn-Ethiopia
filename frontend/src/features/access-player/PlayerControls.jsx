@@ -29,7 +29,7 @@ export default function PlayerControls({
   isSignLanguageActive,
   isAudioDescriptionActive,
 }) {
-  const { preferences, updatePreference } = useAccessibility()
+  const { preferences, updatePreference, t } = useAccessibility()
   const [showSpeedMenu, setShowSpeedMenu] = useState(false)
 
   const handleTimelineChange = (e) => {
@@ -68,10 +68,10 @@ export default function PlayerControls({
             type="button"
             className="control-btn play-btn"
             onClick={onPlayPause}
-            aria-label={isPlaying ? 'Pause video (Space or K)' : 'Play video (Space or K)'}
-            title={isPlaying ? 'Pause (Space or K)' : 'Play (Space or K)'}
+            aria-label={isPlaying ? `${t.player.pause} (Space or K)` : `${t.player.play} (Space or K)`}
+            title={isPlaying ? `${t.player.pause} (Space or K)` : `${t.player.play} (Space or K)`}
           >
-            {isPlaying ? 'Pause' : 'Play'}
+            {isPlaying ? t.player.pause : t.player.play}
           </button>
 
           <button
@@ -81,7 +81,7 @@ export default function PlayerControls({
             aria-label="Rewind 10 seconds (J or Left Arrow)"
             title="Rewind 10 seconds (J)"
           >
-            &minus;10s
+            {t.player.rewind10}
           </button>
 
           <button
@@ -91,7 +91,7 @@ export default function PlayerControls({
             aria-label="Forward 10 seconds (L or Right Arrow)"
             title="Forward 10 seconds (L)"
           >
-            +10s
+            {t.player.forward10}
           </button>
 
           <div className="volume-group">
@@ -99,10 +99,10 @@ export default function PlayerControls({
               type="button"
               className="control-btn mute-btn"
               onClick={onToggleMute}
-              aria-label={isMuted ? 'Unmute sound (M)' : 'Mute sound (M)'}
-              title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
+              aria-label={isMuted ? `${t.player.unmute} (M)` : `${t.player.mute} (M)`}
+              title={isMuted ? `${t.player.unmute} (M)` : `${t.player.mute} (M)`}
             >
-              {isMuted || volume === 0 ? 'Unmute' : 'Mute'}
+              {isMuted || volume === 0 ? t.player.unmute : t.player.mute}
             </button>
             <label htmlFor="volume-slider" className="sr-only">
               Volume level {Math.round(volume * 100)} percent
@@ -138,17 +138,17 @@ export default function PlayerControls({
             aria-pressed={preferences.captionsEnabled}
             title="Toggle Captions (C)"
           >
-            CC
+            {t.player.captions}
           </button>
 
           <select
             className="lang-select"
             value={preferences.language}
             onChange={(e) => updatePreference('language', e.target.value)}
-            aria-label="Select caption and audio language"
+            aria-label="Select caption and interface language"
           >
-            <option value="en">EN</option>
-            <option value="am">አማ / AM</option>
+            <option value="en">English (EN)</option>
+            <option value="am">አማርኛ (AM)</option>
           </select>
 
           {/* EthSL Sign Language Window */}
@@ -220,7 +220,7 @@ export default function PlayerControls({
             aria-label="Toggle Fullscreen (F)"
             title="Fullscreen (F)"
           >
-            Fullscreen
+            {t.player.fullscreen}
           </button>
         </div>
       </div>

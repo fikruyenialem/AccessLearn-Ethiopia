@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react'
 import { fetchPreferences, savePreferences } from '../services/api'
+import { translations } from '../i18n/translations'
 
 const AccessibilityContext = createContext(null)
 
@@ -11,7 +12,7 @@ const DEFAULT_PREFERENCES = {
   contrast: 'normal', // 'normal' | 'high' | 'monochrome'
   colorVision: 'none', // 'none' | 'protanopia_deuteranopia' | 'tritanopia'
   textScale: 1.0, // 1.0 | 1.15 | 1.30 | 1.50
-  language: 'en', // 'en' | 'am'
+  language: 'en', // 'en' | 'am' (English by default)
   captionsEnabled: true,
   captionSize: 'medium', // 'small' | 'medium' | 'large' | 'xlarge'
   captionColor: 'white_on_black', // 'white_on_black' | 'yellow_on_black' | 'cyan_on_black' | 'black_on_white'
@@ -32,6 +33,10 @@ export function AccessibilityProvider({ children }) {
       return DEFAULT_PREFERENCES
     }
   })
+
+  // Current translation dictionary based on active language (default 'en')
+  const currentLang = preferences.language === 'am' ? 'am' : 'en'
+  const t = translations[currentLang] || translations.en
 
   // Apply visual settings to document root
   useEffect(() => {
@@ -86,6 +91,10 @@ export function AccessibilityProvider({ children }) {
     })
   }
 
+  const setLanguage = (lang) => {
+    updatePreference('language', lang === 'am' ? 'am' : 'en')
+  }
+
   const resetPreferences = () => {
     setPreferences(DEFAULT_PREFERENCES)
   }
@@ -96,6 +105,9 @@ export function AccessibilityProvider({ children }) {
         preferences,
         updatePreference,
         resetPreferences,
+        t,
+        language: preferences.language,
+        setLanguage,
       }}
     >
       {children}

@@ -1,52 +1,50 @@
+import { useAccessibility } from '../../context/AccessibilityContext'
 import './Footer.css'
 
 export default function Footer() {
+  const { t } = useAccessibility()
+
   return (
     <footer role="contentinfo" className="app-footer">
       <div className="footer-inner">
         <div className="footer-colophon">
-          <h4 className="colophon-title">ACCESSBRIDGE &bull; AccessLearn Ethiopia</h4>
-          <p className="colophon-text">
-            An open educational accessibility platform engineered for Ethiopian learners, educators, and institutions.
-            Developed for the Digital Bridge Accessibility Hackathon 2026 (Track 2: Accessible Learning Media).
-          </p>
-          <p className="colophon-motto">
-            &ldquo;One lesson. Multiple sensory pathways. No learner left behind.&rdquo;
-          </p>
+          <h4 className="colophon-title">{t.footer.colophonTitle}</h4>
+          <p className="colophon-text">{t.footer.colophonText}</p>
+          <p className="colophon-motto">{t.footer.colophonMotto}</p>
         </div>
 
         <div className="footer-section">
-          <h5 className="section-title">Standards & Conformance</h5>
+          <h5 className="section-title">{t.footer.standardsTitle}</h5>
           <ul className="footer-list">
-            <li>WCAG 2.2 Level AA Accessibility Target</li>
-            <li>WAI-ARIA 1.2 Interactive Semantics</li>
-            <li>Bilingual Captions (Amharic & English)</li>
-            <li>Synchronized EthSL Sign Language Overlays</li>
-            <li>Resilient 3G IndexedDB Offline Storage</li>
+            <li>{t.footer.stdWcag}</li>
+            <li>{t.footer.stdAria}</li>
+            <li>{t.footer.stdCaptions}</li>
+            <li>{t.footer.stdEthsl}</li>
+            <li>{t.footer.stdOffline}</li>
           </ul>
         </div>
 
         <div className="footer-section">
-          <h5 className="section-title">Developer & LMS Integration</h5>
+          <h5 className="section-title">{t.footer.integrationTitle}</h5>
           <ul className="footer-list">
             <li>
               <a href="/api/v1/docs" target="_blank" rel="noreferrer">
-                REST API Documentation (Swagger)
+                {t.footer.swaggerLink}
               </a>
             </li>
             <li>
               <a href="/api/v1/redoc" target="_blank" rel="noreferrer">
-                OpenAPI Specification (ReDoc)
+                {t.footer.redocLink}
               </a>
             </li>
             <li>
               <a href="/api/v1/integrations/savanna/embed.js" target="_blank" rel="noreferrer">
-                Savanna LMS Embed Script
+                {t.footer.savannaLink}
               </a>
             </li>
             <li>
               <a href="/api/v1/health" target="_blank" rel="noreferrer">
-                Backend System Health
+                {t.footer.healthLink}
               </a>
             </li>
           </ul>
@@ -55,8 +53,8 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="footer-bottom-inner">
-          <span>&copy; 2026 AccessLearn Ethiopia &bull; Open Educational Media Commons</span>
-          <span>Addis Ababa, Ethiopia</span>
+          <span>{t.footer.copyright}</span>
+          <span>{t.footer.location}</span>
         </div>
       </div>
     </footer>
