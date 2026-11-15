@@ -42,13 +42,13 @@ export default function JobCard({ job }) {
           aria-label={isPlayingAudio ? `Stop audio summary for ${job.title}` : `Listen to audio overview for ${job.title}`}
           title="Audio Summary"
         >
-          {isPlayingAudio ? '⏹ Stop Summary' : '🔊 Listen to Summary'}
+          {isPlayingAudio ? 'Stop Overview' : 'Audio Overview'}
         </button>
       </div>
 
       <div className="job-meta-row">
-        <span className="job-meta-pill">📍 {job.location}</span>
-        <span className="job-meta-pill">💼 {job.employment_type}</span>
+        <span className="job-meta-pill">{job.location}</span>
+        <span className="job-meta-pill">{job.employment_type}</span>
       </div>
 
       <p className="job-desc">{job.description}</p>
@@ -62,7 +62,7 @@ export default function JobCard({ job }) {
 
       {job.accommodations && (
         <div className="job-section accommodations-box">
-          <strong className="section-label">♿ Accommodations & Assistive Support:</strong>
+          <strong className="section-label">የተደራሽነት ድጋፎች / Accommodations & Assistive Support:</strong>
           <p className="section-text">{job.accommodations}</p>
         </div>
       )}
@@ -75,7 +75,7 @@ export default function JobCard({ job }) {
           className="apply-link"
           aria-label={`Apply for ${job.title} at ${job.organization} (opens in new tab)`}
         >
-          ማመልከቻ አስገባ / Apply for Position ↗
+          ማመልከቻ አስገባ / Apply for Position &rarr;
         </a>
       </div>
     </article>

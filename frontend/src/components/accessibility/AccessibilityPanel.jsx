@@ -29,7 +29,7 @@ export default function AccessibilityPanel() {
       <div className="settings-grid">
         {/* Section 1: Vision & Contrast */}
         <fieldset className="settings-group">
-          <legend className="group-legend">👁 የማየት ተደራሽነት / Vision & Contrast</legend>
+          <legend className="group-legend">የማየት ተደራሽነት / Vision & Contrast</legend>
 
           <div className="setting-item">
             <label htmlFor="pref-text-scale" className="setting-label">
@@ -100,7 +100,7 @@ export default function AccessibilityPanel() {
 
         {/* Section 2: Captions & Hearing */}
         <fieldset className="settings-group">
-          <legend className="group-legend">👂 የመስማት ተደራሽነት / Captions & EthSL</legend>
+          <legend className="group-legend">የመስማት ተደራሽነት / Captions & EthSL</legend>
 
           <div className="setting-item checkbox-item">
             <input
@@ -180,7 +180,7 @@ export default function AccessibilityPanel() {
 
         {/* Section 3: Audio Descriptions & Motor Controls */}
         <fieldset className="settings-group">
-          <legend className="group-legend">🎙 የድምፅ እና የቁልፍ ሰሌዳ / Audio & Navigation</legend>
+          <legend className="group-legend">የድምፅ እና የቁልፍ ሰሌዳ / Audio & Navigation</legend>
 
           <div className="setting-item checkbox-item">
             <input

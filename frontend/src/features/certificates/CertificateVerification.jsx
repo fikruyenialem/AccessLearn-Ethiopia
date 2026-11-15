@@ -67,44 +67,45 @@ export default function CertificateVerification() {
 
       {error && (
         <div className="cert-result-error" role="alert">
-          <span className="error-icon">✕</span>
           <div>
-            <strong>Verification Notice:</strong>
-            <p>{error}</p>
+            <strong>Notice:</strong> {error}
           </div>
         </div>
       )}
 
       {result && (
         <div className="cert-display-card" role="region" aria-label="Verified Certificate Credentials">
-          <div className="cert-card-header">
-            <span className="verified-badge">✓ Authentic Verified Credential</span>
-            <span className="cert-id-code">ID: {result.verification_code}</span>
-          </div>
-
-          <div className="cert-body">
-            <div className="cert-seal">
-              <span>AL</span>
+          <div className="cert-card-inner">
+            <div className="cert-card-header">
+              <div className="cert-institution-mark">
+                <span className="inst-title">ACCESSLEARN ETHIOPIA</span>
+                <span className="inst-sub">Educational Media Accessibility Credential</span>
+              </div>
+              <span className="verified-status">Official Verified Record</span>
             </div>
 
-            <div className="cert-details">
-              <span className="cert-sub">This is to certify that</span>
+            <div className="cert-body">
+              <p className="cert-preamble">This official record certifies that</p>
               <h3 className="cert-recipient">{result.recipient_name}</h3>
-              <span className="cert-sub">has successfully completed the curriculum unit</span>
+              <p className="cert-conferral">has demonstrated proficiency and completed all curriculum requirements for</p>
               <h4 className="cert-course-name">{result.course_title}</h4>
 
-              <div className="cert-footer-meta">
-                <div>
-                  <span className="meta-label">Issuer:</span>
+              <div className="cert-metadata-table">
+                <div className="meta-row">
+                  <span className="meta-label">Credential ID</span>
+                  <span className="meta-val font-mono">{result.verification_code}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-label">Issuing Authority</span>
                   <span className="meta-val">{result.issuer}</span>
                 </div>
-                <div>
-                  <span className="meta-label">Date of Issue:</span>
+                <div className="meta-row">
+                  <span className="meta-label">Date Issued</span>
                   <span className="meta-val">{new Date(result.issued_at).toLocaleDateString()}</span>
                 </div>
-                <div>
-                  <span className="meta-label">Standard:</span>
-                  <span className="meta-val">WCAG 2.2 AA Verified</span>
+                <div className="meta-row">
+                  <span className="meta-label">Accessibility Standard</span>
+                  <span className="meta-val">WCAG 2.2 Level AA Validated</span>
                 </div>
               </div>
             </div>

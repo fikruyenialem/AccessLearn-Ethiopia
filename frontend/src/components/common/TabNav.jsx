@@ -2,15 +2,19 @@ import './TabNav.css'
 
 export default function TabNav({ activeTab, onSelectTab, offlineCount = 0 }) {
   const tabs = [
-    { id: 'courses', label: 'ተማር / Learn & Player', icon: '📚' },
-    { id: 'careers', label: 'የሥራ ዕድሎች / Career Gateway', icon: '💼' },
-    { id: 'offline', label: 'ከመስመር ውጭ / Offline Library', icon: '💾', badge: offlineCount > 0 ? offlineCount : null },
-    { id: 'verify', label: 'ማረጋገጫ / Certificates', icon: '🎓' },
-    { id: 'accessibility', label: 'ተደራሽነት / Accessibility', icon: '♿' },
+    { id: 'courses', label: 'የትምህርት ካታሎግ / Courses' },
+    { id: 'careers', label: 'የሥራ ዕድሎች / Career Gateway' },
+    {
+      id: 'offline',
+      label: 'ከመስመር ውጭ / Offline Library',
+      count: offlineCount > 0 ? `(${offlineCount})` : null,
+    },
+    { id: 'verify', label: 'ማረጋገጫ / Certificates' },
+    { id: 'accessibility', label: 'ተደራሽነት / Accessibility' },
   ]
 
   return (
-    <nav className="tab-navigation" aria-label="Main Platform Sections">
+    <nav className="tab-navigation" aria-label="Primary Platform Navigation">
       <div className="tab-nav-inner" role="tablist">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id
@@ -25,9 +29,8 @@ export default function TabNav({ activeTab, onSelectTab, offlineCount = 0 }) {
               className={`nav-tab-btn ${isActive ? 'active' : ''}`}
               onClick={() => onSelectTab(tab.id)}
             >
-              <span className="tab-icon" aria-hidden="true">{tab.icon}</span>
-              <span className="tab-label">{tab.label}</span>
-              {tab.badge && <span className="tab-counter-badge">{tab.badge}</span>}
+              <span className="tab-label-text">{tab.label}</span>
+              {tab.count && <span className="tab-count-text">{tab.count}</span>}
             </button>
           )
         })}

@@ -8,12 +8,12 @@ export default function Header({ backendHealth, onOpenSettings }) {
     <header role="banner" className="app-header">
       <div className="header-inner">
         <div className="brand-group">
-          <span className="brand-logo" aria-hidden="true">
-            AL
-          </span>
-          <div>
+          <div className="brand-text">
+            <span className="brand-badge-label">Ethiopian Digital Learning Media</span>
             <h1 className="brand-heading">
-              ACCESSBRIDGE <span className="brand-subname">/ AccessLearn Ethiopia</span>
+              <span className="brand-primary">ACCESSBRIDGE</span>
+              <span className="brand-separator"> / </span>
+              <span className="brand-secondary">AccessLearn Ethiopia</span>
             </h1>
             <p className="brand-tagline">
               One lesson. Multiple ways to learn. No learner left behind.
@@ -22,52 +22,52 @@ export default function Header({ backendHealth, onOpenSettings }) {
         </div>
 
         <div className="header-actions">
-          {/* Language Switcher */}
-          <div className="lang-toggle-group" role="group" aria-label="Interface Language">
+          {/* Subtle Language Toggle */}
+          <div className="lang-toggle-group" role="group" aria-label="Interface Language Selection">
             <button
               type="button"
               className={`lang-btn ${preferences.language === 'en' ? 'active' : ''}`}
               onClick={() => updatePreference('language', 'en')}
               aria-pressed={preferences.language === 'en'}
             >
-              EN
+              English
             </button>
+            <span className="lang-divider" aria-hidden="true">|</span>
             <button
               type="button"
               className={`lang-btn ${preferences.language === 'am' ? 'active' : ''}`}
               onClick={() => updatePreference('language', 'am')}
               aria-pressed={preferences.language === 'am'}
             >
-              አማ
+              አማርኛ
             </button>
           </div>
 
-          {/* Accessibility Settings Quick Button */}
+          {/* Quiet Accessibility Options Button */}
           <button
             type="button"
-            className="settings-quick-btn"
+            className="settings-action-btn"
             onClick={onOpenSettings}
-            aria-label="Open accessibility options panel"
-            title="Accessibility Settings"
+            aria-label="Open accessibility preferences dialog"
           >
-            ♿ የተደራሽነት ምርጫዎች
+            Accessibility / ተደራሽነት
           </button>
 
-          {/* Backend Status Pill */}
+          {/* Understated Backend Health Status */}
           <div
-            className="system-pill"
+            className="system-indicator"
             aria-label={`Backend service status: ${backendHealth.data?.healthy ? 'Connected' : 'Offline'}`}
           >
             <span
-              className={`status-dot ${backendHealth.data?.healthy ? 'healthy' : 'pending'}`}
+              className={`status-marker ${backendHealth.data?.healthy ? 'online' : 'offline'}`}
               aria-hidden="true"
             />
-            <span>
+            <span className="status-label">
               {backendHealth.loading
-                ? 'Connecting...'
+                ? 'Connecting'
                 : backendHealth.data?.healthy
-                ? 'Backend Live'
-                : 'Offline Mode'}
+                ? 'Backend Active'
+                : 'Offline'}
             </span>
           </div>
         </div>

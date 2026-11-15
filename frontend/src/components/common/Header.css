@@ -1,17 +1,15 @@
 .app-header {
-  background-color: var(--primary-navy);
-  color: #ffffff;
-  border-bottom: 1px solid #334155;
+  background-color: var(--surface-primary);
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 18px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,123 +20,129 @@
 .brand-group {
   display: flex;
   align-items: center;
-  gap: 14px;
 }
 
-.brand-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background-color: var(--accent-teal);
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 6px rgba(13, 148, 136, 0.4);
+.brand-badge-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin-bottom: 2px;
 }
 
 .brand-heading {
+  font-family: var(--font-serif);
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   margin: 0;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-.brand-subname {
-  font-weight: 500;
-  color: #94a3b8;
-  font-size: 16px;
+.brand-primary {
+  color: var(--text-heading);
+}
+
+.brand-separator {
+  color: var(--border-strong);
+  font-weight: 300;
+}
+
+.brand-secondary {
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .brand-tagline {
   font-size: 12px;
-  color: #cbd5e1;
-  margin: 2px 0 0;
-  font-weight: 400;
+  color: var(--text-caption);
+  margin: 4px 0 0;
+  font-style: italic;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
 }
 
 .lang-toggle-group {
   display: inline-flex;
-  border: 1px solid #475569;
-  border-radius: 6px;
-  overflow: hidden;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
 }
 
 .lang-btn {
   background: transparent;
   border: none;
-  border-right: 1px solid #475569;
-  color: #cbd5e1;
-  font-weight: 700;
+  color: var(--text-muted);
+  font-weight: 500;
   font-size: 13px;
-  padding: 6px 12px;
+  padding: 4px 6px;
+  min-height: 32px;
+  min-width: 32px;
   cursor: pointer;
-  min-height: 36px;
-  min-width: 36px;
-}
-
-.lang-btn:last-child {
-  border-right: none;
+  border-radius: var(--radius-sm);
 }
 
 .lang-btn:hover {
-  background-color: #334155;
-  color: #ffffff;
+  color: var(--text-heading);
+  text-decoration: underline;
 }
 
 .lang-btn.active {
-  background-color: var(--accent-teal);
-  color: #ffffff;
+  color: var(--accent-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent-primary);
+  border-radius: 0;
 }
 
-.settings-quick-btn {
-  background-color: #1e293b;
-  border: 1px solid #475569;
-  color: #f1f5f9;
-  font-weight: 600;
+.lang-divider {
+  color: var(--border-strong);
+  font-size: 12px;
+}
+
+.settings-action-btn {
+  background-color: var(--surface-muted);
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
   font-size: 13px;
+  font-weight: 500;
   padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  min-height: 38px;
+  min-height: 36px;
 }
 
-.settings-quick-btn:hover {
-  background-color: #334155;
-  border-color: var(--accent-teal);
+.settings-action-btn:hover {
+  background-color: var(--surface-alt);
+  border-color: var(--border-focus);
 }
 
-.system-pill {
+.system-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 9999px;
-  background-color: #1e293b;
-  border: 1px solid #334155;
+  gap: 6px;
   font-size: 12px;
-  font-weight: 600;
-  color: #cbd5e1;
+  color: var(--text-caption);
+  user-select: none;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
+.status-marker {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background-color: #f59e0b;
 }
 
-.status-dot.healthy {
-  background-color: #10b981;
+.status-marker.online {
+  background-color: var(--success-text);
+}
+
+.status-marker.offline {
+  background-color: var(--warning-text);
 }

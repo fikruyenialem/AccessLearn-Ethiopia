@@ -1,13 +1,16 @@
 .course-catalogue {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .catalogue-header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .catalogue-title {
-  font-size: 22px;
+  font-family: var(--font-serif);
+  font-size: 24px;
   font-weight: 700;
   margin: 0 0 6px;
   color: var(--text-heading);
@@ -17,127 +20,119 @@
   color: var(--text-muted);
   font-size: 15px;
   margin: 0;
+  max-width: 680px;
+  line-height: 1.5;
 }
 
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+.courses-list {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
-.course-card {
-  background-color: var(--primary-surface);
+.course-entry {
+  background-color: var(--surface-primary);
   border: 1px solid var(--border-subtle);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  grid-template-columns: 280px 1fr;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease;
 }
 
-.course-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+.course-entry:hover {
+  border-color: var(--border-strong);
 }
 
-.course-thumb-wrap {
-  position: relative;
+@media (max-width: 768px) {
+  .course-entry {
+    grid-template-columns: 1fr;
+  }
+}
+
+.course-media-frame {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  background-color: #0f172a;
+  height: 100%;
+  min-height: 180px;
+  background-color: var(--surface-muted);
 }
 
-.course-thumb {
+.course-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.course-source-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 700;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.course-source-badge.savanna {
-  background-color: #d97706;
-  color: #ffffff;
-}
-
-.course-source-badge.internal {
-  background-color: #0d9488;
-  color: #ffffff;
-}
-
-.course-card-body {
-  padding: 20px;
+.course-content {
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
-.course-meta {
+.course-eyebrow {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-caption);
   margin-bottom: 10px;
 }
 
-.course-level-badge {
-  font-size: 11px;
+.source-label {
   font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background-color: var(--surface-alt);
-  color: var(--text-muted);
+  color: var(--accent-primary);
 }
 
-.course-lang-tag {
-  font-size: 11px;
-  color: var(--text-muted);
+.eyebrow-divider {
+  color: var(--border-strong);
 }
 
-.course-card-title {
-  font-size: 18px;
+.level-label {
+  font-weight: 500;
+}
+
+.lang-label {
+  font-weight: 400;
+}
+
+.course-heading {
+  font-family: var(--font-serif);
+  font-size: 20px;
   font-weight: 700;
   margin: 0 0 10px;
   color: var(--text-heading);
   line-height: 1.35;
 }
 
-.course-card-desc {
+.course-description {
   font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 20px;
-  flex: 1;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  max-width: 720px;
 }
 
-.course-card-footer {
+.course-action-row {
   margin-top: auto;
 }
 
-.start-course-btn {
-  width: 100%;
-  background-color: var(--accent-teal);
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-size: 14px;
+.open-course-btn {
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
 }
 
-.start-course-btn:hover {
-  background-color: var(--accent-teal-hover);
+.open-course-btn:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff;
 }

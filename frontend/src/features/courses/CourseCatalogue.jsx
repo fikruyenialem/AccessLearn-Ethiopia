@@ -4,56 +4,57 @@ export default function CourseCatalogue({ courses, onSelectCourse }) {
   return (
     <section className="course-catalogue" aria-labelledby="catalogue-title">
       <div className="catalogue-header">
-        <div>
-          <h2 id="catalogue-title" className="catalogue-title">
-            የትምህርት ካታሎግ / Accessible Course Catalogue
-          </h2>
-          <p className="catalogue-subtitle">
-            Curriculum units engineered for Deaf, blind, low-vision, and low-bandwidth learners.
-          </p>
-        </div>
+        <h2 id="catalogue-title" className="catalogue-title">
+          የትምህርት ካታሎግ / Accessible Curriculum
+        </h2>
+        <p className="catalogue-subtitle">
+          Structured learning units engineered for Deaf, blind, low-vision, and 2G/3G mobile learners.
+        </p>
       </div>
 
-      <div className="courses-grid" role="list">
+      <div className="courses-list" role="list">
         {courses.map((course) => (
           <article
             key={course.id}
-            className="course-card"
+            className="course-entry"
             role="listitem"
             aria-labelledby={`course-title-${course.id}`}
           >
-            <div className="course-thumb-wrap">
+            <div className="course-media-frame">
               <img
                 src={course.thumbnail}
-                alt={`Cover for ${course.title}`}
-                className="course-thumb"
+                alt=""
+                aria-hidden="true"
+                className="course-image"
                 loading="lazy"
               />
-              <span className={`course-source-badge ${course.source}`}>
-                {course.source === 'savanna' ? 'ALX Savanna' : 'AccessLearn Core'}
-              </span>
             </div>
 
-            <div className="course-card-body">
-              <div className="course-meta">
-                <span className="course-level-badge">{course.level}</span>
-                <span className="course-lang-tag">Amharic + English</span>
+            <div className="course-content">
+              <div className="course-eyebrow">
+                <span className="source-label">
+                  {course.source === 'savanna' ? 'ALX Savanna Platform' : 'AccessLearn Core'}
+                </span>
+                <span className="eyebrow-divider">&bull;</span>
+                <span className="level-label">{course.level} Level</span>
+                <span className="eyebrow-divider">&bull;</span>
+                <span className="lang-label">Bilingual (English &amp; Amharic)</span>
               </div>
 
-              <h3 id={`course-title-${course.id}`} className="course-card-title">
+              <h3 id={`course-title-${course.id}`} className="course-heading">
                 {course.title}
               </h3>
 
-              <p className="course-card-desc">{course.description}</p>
+              <p className="course-description">{course.description}</p>
 
-              <div className="course-card-footer">
+              <div className="course-action-row">
                 <button
                   type="button"
-                  className="start-course-btn"
+                  className="open-course-btn"
                   onClick={() => onSelectCourse(course.id)}
-                  aria-label={`Open course: ${course.title}`}
+                  aria-label={`Open course lessons for ${course.title}`}
                 >
-                  ተማር / Open Lessons →
+                  ትምህርቶችን ክፈት / Open Lessons &rarr;
                 </button>
               </div>
             </div>

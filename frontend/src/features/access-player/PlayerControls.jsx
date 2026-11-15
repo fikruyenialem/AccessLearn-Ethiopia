@@ -40,7 +40,7 @@ export default function PlayerControls({
 
   return (
     <div className="player-controls-container" role="toolbar" aria-label="Media Player Controls">
-      {/* Accessible Timeline Scrub Bar */}
+      {/* Timeline Scrub Bar */}
       <div className="timeline-wrapper">
         <label htmlFor="player-timeline" className="sr-only">
           Video timeline progress. Current time {formatTime(currentTime)} of {formatTime(duration)}
@@ -71,7 +71,7 @@ export default function PlayerControls({
             aria-label={isPlaying ? 'Pause video (Space or K)' : 'Play video (Space or K)'}
             title={isPlaying ? 'Pause (Space or K)' : 'Play (Space or K)'}
           >
-            {isPlaying ? '⏸' : '▶'}
+            {isPlaying ? 'Pause' : 'Play'}
           </button>
 
           <button
@@ -81,17 +81,17 @@ export default function PlayerControls({
             aria-label="Rewind 10 seconds (J or Left Arrow)"
             title="Rewind 10 seconds (J)"
           >
-            ⏪ 10s
+            &minus;10s
           </button>
 
           <button
             type="button"
             className="control-btn"
             onClick={() => onSeek(Math.min(duration, currentTime + 10))}
-            aria-label="Fast forward 10 seconds (L or Right Arrow)"
-            title="Fast forward 10 seconds (L)"
+            aria-label="Forward 10 seconds (L or Right Arrow)"
+            title="Forward 10 seconds (L)"
           >
-            10s ⏩
+            +10s
           </button>
 
           <div className="volume-group">
@@ -102,7 +102,7 @@ export default function PlayerControls({
               aria-label={isMuted ? 'Unmute sound (M)' : 'Mute sound (M)'}
               title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
             >
-              {isMuted || volume === 0 ? '🔇' : volume < 0.5 ? '🔉' : '🔊'}
+              {isMuted || volume === 0 ? 'Unmute' : 'Mute'}
             </button>
             <label htmlFor="volume-slider" className="sr-only">
               Volume level {Math.round(volume * 100)} percent
@@ -129,7 +129,7 @@ export default function PlayerControls({
 
         {/* Right Side: Accessibility Toggles, Speed, Fullscreen */}
         <div className="controls-group">
-          {/* Closed Captions Toggle & Language */}
+          {/* Captions */}
           <button
             type="button"
             className={`control-btn badge-btn ${preferences.captionsEnabled ? 'active' : ''}`}
@@ -147,17 +147,17 @@ export default function PlayerControls({
             onChange={(e) => updatePreference('language', e.target.value)}
             aria-label="Select caption and audio language"
           >
-            <option value="en">English (EN)</option>
-            <option value="am">አማርኛ / Amharic (AM)</option>
+            <option value="en">EN</option>
+            <option value="am">አማ / AM</option>
           </select>
 
-          {/* Ethiopian Sign Language (EthSL) Window Toggle */}
+          {/* EthSL Sign Language Window */}
           {hasSignLanguage && (
             <button
               type="button"
               className={`control-btn badge-btn ${isSignLanguageActive ? 'active' : ''}`}
               onClick={onToggleSignLanguage}
-              aria-label={`Toggle Ethiopian Sign Language interpreter window. Currently ${isSignLanguageActive ? 'visible' : 'hidden'}`}
+              aria-label={`Toggle Ethiopian Sign Language overlay. Currently ${isSignLanguageActive ? 'visible' : 'hidden'}`}
               aria-pressed={isSignLanguageActive}
               title="Toggle Ethiopian Sign Language (S)"
             >
@@ -165,7 +165,7 @@ export default function PlayerControls({
             </button>
           )}
 
-          {/* Audio Description Toggle */}
+          {/* Audio Description */}
           {hasAudioDescription && (
             <button
               type="button"
@@ -179,7 +179,7 @@ export default function PlayerControls({
             </button>
           )}
 
-          {/* Playback Speed Menu */}
+          {/* Speed */}
           <div className="speed-dropdown-wrapper">
             <button
               type="button"
@@ -220,7 +220,7 @@ export default function PlayerControls({
             aria-label="Toggle Fullscreen (F)"
             title="Fullscreen (F)"
           >
-            ⛶
+            Fullscreen
           </button>
         </div>
       </div>

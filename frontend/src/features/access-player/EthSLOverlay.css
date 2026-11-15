@@ -1,11 +1,11 @@
 .ethsl-window {
   position: absolute;
   z-index: 30;
-  background-color: #0f172a;
-  border: 2px solid #0d9488;
-  border-radius: 8px;
+  background-color: #18181b;
+  border: 1px solid #3f3f46;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
 
 /* Sizing */
 .ethsl-window.size-normal {
-  width: 220px;
+  width: 230px;
 }
 
 .ethsl-window.size-large {
@@ -46,59 +46,73 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  background-color: #1e293b;
-  border-bottom: 1px solid #334155;
-  color: #ffffff;
-  font-size: 12px;
+  background-color: #27272a;
+  border-bottom: 1px solid #3f3f46;
+  color: #f4f4f5;
+  font-size: 11px;
+  font-family: var(--font-body);
   user-select: none;
 }
 
 .ethsl-badge {
-  background-color: #0d9488;
+  background-color: var(--accent-terracotta);
   color: #ffffff;
   font-weight: 700;
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 2px;
 }
 
 .ethsl-title {
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 6px;
+  margin: 0 8px;
+  color: #e4e4e7;
 }
 
 .ethsl-controls {
   display: flex;
+  align-items: center;
   gap: 4px;
 }
 
 .ethsl-btn {
-  min-height: 28px;
-  min-width: 28px;
-  padding: 0;
+  min-height: 22px;
+  padding: 1px 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  color: #94a3b8;
-  border: 1px solid #475569;
-  border-radius: 4px;
-  font-size: 14px;
+  background: #18181b;
+  color: #a1a1aa;
+  border: 1px solid #3f3f46;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
   cursor: pointer;
 }
 
 .ethsl-btn:hover,
 .ethsl-btn:focus-visible {
-  color: #ffffff;
-  background-color: #334155;
-  border-color: #0d9488;
+  color: #f4f4f5;
+  background-color: #3f3f46;
+  border-color: #71717a;
+}
+
+.ethsl-btn-close {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1px 5px;
 }
 
 .ethsl-btn-close:hover {
-  background-color: #b91c1c;
+  background-color: #7f1d1d;
+  border-color: #991b1b;
   color: #ffffff;
 }
 

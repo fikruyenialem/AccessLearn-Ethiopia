@@ -142,7 +142,7 @@ export default function InteractiveTranscript({
           <h3 id="transcript-heading" className="transcript-title">
             በይነተገናኝ ግልባጭ / Interactive Transcript
           </h3>
-          <span className="transcript-badge">WCAG 2.2 Synchronized</span>
+          <span className="transcript-badge">Synchronized</span>
         </div>
 
         <div className="transcript-actions">
@@ -154,7 +154,7 @@ export default function InteractiveTranscript({
             aria-label={isSpeaking ? 'Stop reading transcript aloud' : 'Read transcript aloud using text to speech'}
             title="Read Aloud"
           >
-            {isSpeaking ? '⏹ Stop Audio' : '🔊 Read Aloud'}
+            {isSpeaking ? 'Stop Speech' : 'Read Aloud'}
           </button>
 
           {/* Copy Button */}
@@ -164,7 +164,7 @@ export default function InteractiveTranscript({
             onClick={handleCopy}
             aria-label="Copy entire transcript with timestamps"
           >
-            {copied ? '✓ Copied' : '📋 Copy'}
+            {copied ? 'Copied' : 'Copy'}
           </button>
 
           {/* Download Dropdown */}
@@ -178,10 +178,10 @@ export default function InteractiveTranscript({
             }}
             aria-label="Download transcript in TXT, VTT, or SRT format"
           >
-            <option value="">⬇ Export</option>
-            <option value="txt">Download as TXT</option>
-            <option value="vtt">Download as WebVTT</option>
-            <option value="srt">Download as SRT</option>
+            <option value="">Export</option>
+            <option value="txt">Download Text (.txt)</option>
+            <option value="vtt">Download WebVTT (.vtt)</option>
+            <option value="srt">Download SubRip (.srt)</option>
           </select>
 
           {/* Font Size Adjusters */}
@@ -283,7 +283,7 @@ export default function InteractiveTranscript({
             >
               <div className="line-meta">
                 <span className="timestamp-badge">{formatTimestamp(cue.start)}</span>
-                {isActive && <span className="active-pill" aria-hidden="true">▶ NOW</span>}
+                {isActive && <span className="active-pill" aria-hidden="true">Active</span>}
               </div>
               <p className="line-text">{text}</p>
             </div>

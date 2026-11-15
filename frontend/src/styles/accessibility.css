@@ -2,7 +2,7 @@
 
 /* Universal Accessibility Utilities (WCAG 2.2 Level AA / AAA) */
 
-/* High-contrast visible keyboard focus indicators */
+/* High-contrast crisp keyboard focus indicators */
 *:focus-visible {
   outline: var(--focus-outline-width) solid var(--focus-outline-color) !important;
   outline-offset: var(--focus-outline-offset) !important;
@@ -21,7 +21,7 @@
   border: 0 !important;
 }
 
-/* Reduced motion support */
+/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -33,18 +33,18 @@
   }
 }
 
-/* Interactive touch/keyboard minimum tap targets */
+/* Touch and keyboard interactive target baseline */
 button,
 a,
 input,
 select {
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 40px;
+  min-width: 40px;
   box-sizing: border-box;
 }
 
-/* Zoom resilience (200% zoom standard) */
-@media (max-width: 640px) {
+/* 200% Zoom Protection */
+@media (max-width: 768px) {
   body {
     word-break: break-word;
   }

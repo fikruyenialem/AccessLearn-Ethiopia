@@ -46,7 +46,7 @@ export default function EthSLOverlay({
     >
       <div className="ethsl-header">
         <span className="ethsl-badge">EthSL</span>
-        <span className="ethsl-title">ምልክት ቋንቋ / Interpreter</span>
+        <span className="ethsl-title">ምልክት ቋንቋ &bull; Sign Language</span>
         <div className="ethsl-controls">
           <button
             type="button"
@@ -55,7 +55,7 @@ export default function EthSLOverlay({
             title={`Move position (Currently ${preferences.ethSLPosition})`}
             aria-label={`Reposition sign language window, currently at ${preferences.ethSLPosition}`}
           >
-            &#x2922;
+            Pos
           </button>
           <button
             type="button"
@@ -64,7 +64,7 @@ export default function EthSLOverlay({
             title={`Toggle size (Currently ${preferences.ethSLSize})`}
             aria-label={`Toggle size between normal and large, currently ${preferences.ethSLSize}`}
           >
-            &#x26F6;
+            Size
           </button>
           <button
             type="button"

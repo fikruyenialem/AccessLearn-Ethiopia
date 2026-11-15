@@ -1,36 +1,65 @@
 :root {
-  /* Brand Palette (Restrained Professional EdTech Identity) */
-  --primary-navy: #0f172a;
-  --primary-navy-dark: #020617;
-  --primary-surface: #ffffff;
-  --surface-muted: #f8fafc;
-  --surface-alt: #f1f5f9;
-  
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
+  /* Human-Designed Editorial Educational Palette */
+  /* Canvas & Neutral Surfaces */
+  --canvas-bg: #fcfbf9;
+  --surface-primary: #ffffff;
+  --surface-muted: #f6f5f1;
+  --surface-alt: #edebe4;
 
-  --text-main: #1e293b;
-  --text-muted: #475569;
-  --text-heading: #0f172a;
+  /* Borders & Dividers (Subtle Hairline Rules, No Heavy Shadows) */
+  --border-subtle: #e7e5e0;
+  --border-strong: #d3cfc7;
+  --border-focus: #1c1917;
 
-  /* Meaningful Interactive & Action Accents */
-  --accent-teal: #0d9488;
-  --accent-teal-hover: #0f766e;
-  --accent-teal-subtle: #ccfbf1;
-  --accent-warm: #d97706;
-  --accent-warm-hover: #b45309;
+  /* Typography Colors (High Contrast, Warm Charcoal & Stone) */
+  --text-main: #1c1917;
+  --text-heading: #1c1917;
+  --text-muted: #57534e;
+  --text-caption: #78716c;
 
-  /* Feedback Colors */
-  --success-green: #15803d;
-  --success-bg: #dcfce7;
-  --warning-amber: #b45309;
-  --error-red: #b91c1c;
+  /* Primary Action & Editorial Interactive Accent (Terracotta / Warm Rust) */
+  --accent-primary: #9a3412;
+  --accent-hover: #7c2d12;
+  --accent-subtle: #ffedd5;
+  --accent-surface: #fff7ed;
 
-  /* Typography with Ethiopic Unicode Script Support */
+  /* Earthy & Muted Accents */
+  --earth-umber: #78350f;
+  --earth-espresso: #292524;
+  --earth-slate: #334155;
+
+  /* Institutional Feedback */
+  --success-text: #166534;
+  --success-bg: #f0fdf4;
+  --success-border: #bbf7d0;
+
+  --warning-text: #854d0e;
+  --warning-bg: #fefce8;
+  --warning-border: #fef08a;
+
+  --error-text: #991b1b;
+  --error-bg: #fef2f2;
+  --error-border: #fecaca;
+
+  /* Controlled Radius (No Puffy Giant Rounded Shapes) */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* Typography Scales */
+  --font-serif: 'Georgia', 'Charter', 'Iowan Old Style', 'Times New Roman', serif;
   --font-sans: 'Noto Sans Ethiopic', 'Nyala', 'Abyssinica SIL', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
-  /* Base Scalable Units (Multiplied by --text-scale in Accessibility Context) */
+  /* Aliases for Semantic Reference */
+  --font-heading: var(--font-serif);
+  --font-body: var(--font-sans);
+  --primary-surface: var(--surface-primary);
+  --accent-terracotta: var(--accent-primary);
+  --accent-terracotta-subtle: var(--accent-subtle);
+  --primary-charcoal: var(--text-heading);
+
+  /* Dynamic Text Scale for Accessibility (Base 16px) */
   --text-scale-factor: 1;
   --font-size-base: calc(16px * var(--text-scale-factor));
   --font-size-sm: calc(14px * var(--text-scale-factor));
@@ -39,46 +68,59 @@
   --font-size-xl: calc(22px * var(--text-scale-factor));
   --font-size-2xl: calc(28px * var(--text-scale-factor));
 
-  /* Focus Indicator Ring */
-  --focus-outline-color: #0d9488;
-  --focus-outline-width: 3px;
-  --focus-outline-offset: 3px;
+  /* Keyboard Focus Indicators */
+  --focus-outline-color: #9a3412;
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 2px;
 }
 
-/* Dark Mode Theme */
+/* Dark Mode (Muted Charcoal & Warm Sepia, Never Neon) */
 [data-theme='dark'] {
-  --primary-navy: #090d16;
-  --primary-surface: #111827;
-  --surface-muted: #1f2937;
-  --surface-alt: #374151;
-  --border-subtle: #374151;
-  --border-strong: #4b5563;
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --text-heading: #ffffff;
-  --accent-teal: #14b8a6;
-  --accent-teal-hover: #2dd4bf;
-  --accent-teal-subtle: rgba(20, 184, 166, 0.15);
-  --focus-outline-color: #2dd4bf;
+  --canvas-bg: #141312;
+  --surface-primary: #1c1a19;
+  --surface-muted: #242220;
+  --surface-alt: #2f2c2a;
+
+  --border-subtle: #33302c;
+  --border-strong: #44403c;
+  --border-focus: #fafaf9;
+
+  --text-main: #f5f5f4;
+  --text-heading: #fafaf9;
+  --text-muted: #a8a29e;
+  --text-caption: #78716c;
+
+  --accent-primary: #ea580c;
+  --accent-hover: #f97316;
+  --accent-subtle: #431407;
+  --accent-surface: #2a140d;
+
+  --focus-outline-color: #f97316;
 }
 
-/* High Contrast Mode Theme (WCAG 2.2 AAA Target) */
+/* High Contrast Mode (WCAG AAA Target: Absolute Black & Pure White) */
 [data-contrast='high'] {
-  --primary-navy: #000000;
-  --primary-surface: #000000;
-  --surface-muted: #111111;
-  --surface-alt: #222222;
+  --canvas-bg: #000000;
+  --surface-primary: #000000;
+  --surface-muted: #0d0d0d;
+  --surface-alt: #1a1a1a;
+
   --border-subtle: #ffffff;
   --border-strong: #ffffff;
+  --border-focus: #ffff00;
+
   --text-main: #ffffff;
-  --text-muted: #f0f0f0;
-  --text-heading: #ffff00;
-  --accent-teal: #00ffff;
-  --accent-teal-hover: #ffffff;
-  --accent-teal-subtle: #003333;
-  --accent-warm: #ffff00;
+  --text-heading: #ffffff;
+  --text-muted: #e5e5e5;
+  --text-caption: #cccccc;
+
+  --accent-primary: #ffff00;
+  --accent-hover: #ffffff;
+  --accent-subtle: #333300;
+  --accent-surface: #000000;
+
   --focus-outline-color: #ffff00;
-  --focus-outline-width: 4px;
+  --focus-outline-width: 3px;
 }
 
 /* Monochrome Mode */
@@ -86,16 +128,15 @@
   filter: grayscale(100%);
 }
 
-/* Color-Vision Deficiency Accommodations */
+/* Color-Vision Accommodations */
 [data-color-vision='protanopia_deuteranopia'] {
-  --accent-teal: #0284c7;
-  --accent-warm: #d97706;
-  --success-green: #0369a1;
-  --error-red: #ea580c;
+  --accent-primary: #0284c7;
+  --accent-hover: #0369a1;
+  --accent-subtle: #e0f2fe;
 }
 
 [data-color-vision='tritanopia'] {
-  --accent-teal: #059669;
-  --accent-warm: #dc2626;
-  --success-green: #059669;
+  --accent-primary: #059669;
+  --accent-hover: #047857;
+  --accent-subtle: #d1fae5;
 }

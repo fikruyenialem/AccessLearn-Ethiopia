@@ -18,7 +18,6 @@ export default function LessonView({
   const currentLesson =
     course.lessons.find((l) => l.id === activeLessonId) || course.lessons[0]
 
-  // Load sample bilingual transcript cues
   useEffect(() => {
     fetch('/transcripts/lesson1.json')
       .then((res) => res.json())
@@ -26,7 +25,6 @@ export default function LessonView({
       .catch(() => {})
   }, [currentLesson])
 
-  // Extract media assets
   const videoAsset = currentLesson.media_assets?.find((m) => m.media_type === 'video')
   const signLanguageAsset = currentLesson.media_assets?.find(
     (m) => m.media_type === 'sign_language'
@@ -47,7 +45,7 @@ export default function LessonView({
   }
 
   const handleDownloadOffline = async (packageType) => {
-    setDownloadStatus('Downloading pack...')
+    setDownloadStatus('Downloading...')
     try {
       await saveOfflineLesson(
         {
@@ -56,86 +54,88 @@ export default function LessonView({
         },
         packageType
       )
-      setDownloadStatus('✓ Downloaded for offline use!')
+      setDownloadStatus('Saved to Offline Library')
       setTimeout(() => setDownloadStatus(null), 3500)
     } catch (err) {
-      setDownloadStatus(`Download failed: ${err.message}`)
+      setDownloadStatus(`Error: ${err.message}`)
       setTimeout(() => setDownloadStatus(null), 4000)
     }
   }
 
   return (
     <div className="lesson-view-container">
-      {/* Top Breadcrumb & Navigation */}
-      <div className="lesson-top-nav">
+      {/* Top Breadcrumb & Clean Progress Indicator */}
+      <div className="lesson-top-bar">
         <button
           type="button"
-          className="back-btn"
+          className="back-link-btn"
           onClick={onBackToCatalogue}
-          aria-label="Back to course catalogue"
+          aria-label="Return to course catalogue"
         >
-          ← ተመለስ / All Courses
+          &larr; Back to Curriculum
         </button>
 
-        <div className="course-progress-badge" aria-label={`Lesson progress: ${progressState.percentage}%`}>
-          <span>Progress: <strong>{progressState.percentage}%</strong></span>
-          <div className="progress-bar-track" aria-hidden="true">
-            <div className="progress-bar-fill" style={{ width: `${progressState.percentage}%` }} />
+        <div className="progress-indicator" aria-label={`Lesson progress: ${progressState.percentage}%`}>
+          <span className="progress-text">Lesson Progress: {progressState.percentage}%</span>
+          <div className="progress-track" aria-hidden="true">
+            <div className="progress-fill" style={{ width: `${progressState.percentage}%` }} />
           </div>
         </div>
       </div>
 
       <header className="lesson-header">
-        <span className="lesson-seq-badge">Lesson {currentLesson.sequence_number}</span>
+        <span className="lesson-step">Unit {currentLesson.sequence_number}</span>
         <h2 className="lesson-title">{currentLesson.title}</h2>
-        <p className="lesson-desc">{currentLesson.description}</p>
+        <p className="lesson-intro">{currentLesson.description}</p>
       </header>
 
-      {/* Mode Tabs: Multimedia Player vs Accessible HTML Document */}
-      <div className="lesson-tabs" role="tablist" aria-label="Lesson Content Mode">
-        <button
-          type="button"
-          role="tab"
-          id="tab-player"
-          aria-selected={activeTab === 'player'}
-          aria-controls="panel-player"
-          className={`lesson-tab-btn ${activeTab === 'player' ? 'active' : ''}`}
-          onClick={() => setActiveTab('player')}
-        >
-          🎬 AccessPlayer (ቪዲዮ & ምልክት ቋንቋ)
-        </button>
-
-        <button
-          type="button"
-          role="tab"
-          id="tab-document"
-          aria-selected={activeTab === 'document'}
-          aria-controls="panel-document"
-          className={`lesson-tab-btn ${activeTab === 'document' ? 'active' : ''}`}
-          onClick={() => setActiveTab('document')}
-        >
-          📄 ተደራሽ ጽሑፍ / Accessible HTML Document
-        </button>
-
-        <div className="offline-download-action">
+      {/* Clean Mode Switcher */}
+      <div className="lesson-mode-bar">
+        <div className="mode-tabs" role="tablist" aria-label="Content Format Selection">
           <button
             type="button"
-            className="download-pack-btn"
-            onClick={() => handleDownloadOffline('full')}
-            aria-label="Download offline learning pack containing audio, transcript, and HTML"
+            role="tab"
+            id="tab-player"
+            aria-selected={activeTab === 'player'}
+            aria-controls="panel-player"
+            className={`mode-tab-btn ${activeTab === 'player' ? 'active' : ''}`}
+            onClick={() => setActiveTab('player')}
           >
-            ⬇ 3G Offline Pack
+            Media Player &amp; Sign Language
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            id="tab-document"
+            aria-selected={activeTab === 'document'}
+            aria-controls="panel-document"
+            className={`mode-tab-btn ${activeTab === 'document' ? 'active' : ''}`}
+            onClick={() => setActiveTab('document')}
+          >
+            Accessible Reading Document
+          </button>
+        </div>
+
+        <div className="offline-utility">
+          <button
+            type="button"
+            className="offline-pack-btn"
+            onClick={() => handleDownloadOffline('full')}
+            aria-label="Download 3G offline lesson package containing text, captions, and audio"
+          >
+            Save 3G Offline Pack
           </button>
           {downloadStatus && (
-            <span className="download-status-msg" aria-live="polite">
+            <span className="download-feedback" aria-live="polite">
               {downloadStatus}
             </span>
           )}
         </div>
       </div>
 
-      {/* Main View Area */}
-      <div className="lesson-body">
+      {/* Viewport Area */}
+      <div className="lesson-viewport">
         {activeTab === 'player' ? (
           <div id="panel-player" role="tabpanel" aria-labelledby="tab-player">
             <AccessPlayer
@@ -152,33 +152,36 @@ export default function LessonView({
             id="panel-document"
             role="tabpanel"
             aria-labelledby="tab-document"
-            className="accessible-document-panel"
+            className="reading-document-view"
           >
-            <div className="doc-meta-bar">
-              <span>Tagged Accessible HTML &bull; Screen-Reader Optimized &bull; Zoom 200% Safe</span>
+            <div className="document-masthead">
+              <span className="document-badge">Tagged Accessible HTML Document</span>
+              <span className="document-meta">Optimized for Screen Readers &bull; Zoom 200% Certified</span>
             </div>
             <div
-              className="doc-rendered-html"
+              className="document-body"
               dangerouslySetInnerHTML={{ __html: currentLesson.content_html }}
             />
           </div>
         )}
       </div>
 
-      {/* Lesson Switcher if multiple lessons exist in course */}
+      {/* Multi-lesson Switcher */}
       {course.lessons.length > 1 && (
-        <nav className="lesson-switcher-nav" aria-label="Course Lessons Navigation">
-          <h3 className="switcher-heading">የትምህርት ክፍሎች / Course Lessons:</h3>
-          <div className="switcher-list">
+        <nav className="course-sequence-nav" aria-label="Curriculum Unit Sequence">
+          <h3 className="sequence-heading">Course Units</h3>
+          <div className="sequence-list">
             {course.lessons.map((l) => (
               <button
                 key={l.id}
                 type="button"
-                className={`switcher-btn ${l.id === currentLesson.id ? 'active' : ''}`}
+                className={`sequence-item-btn ${l.id === currentLesson.id ? 'active' : ''}`}
                 onClick={() => onSelectLesson(l.id)}
                 aria-current={l.id === currentLesson.id ? 'true' : 'false'}
               >
-                {l.sequence_number}. {l.title} ({l.estimated_duration}m)
+                <span className="seq-num">{l.sequence_number}</span>
+                <span className="seq-title">{l.title}</span>
+                <span className="seq-duration">{l.estimated_duration} min</span>
               </button>
             ))}
           </div>

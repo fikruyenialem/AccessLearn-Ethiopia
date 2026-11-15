@@ -1,5 +1,5 @@
 .career-gateway-section {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .career-header {
@@ -9,11 +9,14 @@
   margin-bottom: 24px;
   flex-wrap: wrap;
   gap: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 18px;
 }
 
 .career-title {
-  font-size: 22px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
   margin: 0 0 6px;
   color: var(--text-heading);
 }
@@ -23,6 +26,7 @@
   font-size: 15px;
   margin: 0;
   max-width: 650px;
+  line-height: 1.5;
 }
 
 .career-filters {
@@ -34,13 +38,14 @@
   background-color: var(--primary-surface);
   border: 1px solid var(--border-strong);
   color: var(--text-main);
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 8px 12px;
-  font-size: 14px;
+  font-size: 13px;
+  font-family: var(--font-body);
 }
 
 .jobs-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }

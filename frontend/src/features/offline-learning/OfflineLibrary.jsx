@@ -66,10 +66,9 @@ export default function OfflineLibrary({ onOpenLesson }) {
         <p>Loading offline storage...</p>
       ) : offlineLessons.length === 0 ? (
         <div className="offline-empty-state">
-          <div className="empty-icon">💾</div>
-          <h3>ምንም የወረዱ ትምህርቶች የሉም / No Offline Lessons Yet</h3>
+          <h3>ምንም የወረዱ ትምህርቶች የሉም / No Offline Lessons Stored</h3>
           <p>
-            When viewing any course lesson, click <strong>"⬇ 3G Offline Pack"</strong> to save lessons,
+            When viewing any course lesson, click <strong>"3G Offline Pack"</strong> to save lessons,
             accessible HTML documents, and audio transcripts directly for offline study.
           </p>
         </div>
@@ -83,7 +82,7 @@ export default function OfflineLibrary({ onOpenLesson }) {
               aria-labelledby={`offline-title-${item.lessonId}`}
             >
               <div className="offline-card-top">
-                <span className="offline-tag">Offline Ready</span>
+                <span className="offline-tag">Local Copy Ready</span>
                 <span className="offline-size">{formatBytes(item.fileSizeBytes)}</span>
               </div>
 
@@ -105,7 +104,7 @@ export default function OfflineLibrary({ onOpenLesson }) {
                   onClick={() => onOpenLesson(item.rawPack)}
                   aria-label={`Open downloaded lesson: ${item.title}`}
                 >
-                  ተማር / Open Lesson →
+                  ተማር / Open Lesson &rarr;
                 </button>
                 <button
                   type="button"
@@ -114,7 +113,7 @@ export default function OfflineLibrary({ onOpenLesson }) {
                   aria-label={`Delete ${item.title} from offline storage`}
                   title="Remove from device storage"
                 >
-                  🗑
+                  Remove
                 </button>
               </div>
             </article>
